@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css'
 
 import Wave from '../../assets/img/Login/wave.png'
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import UsuarioService from '../../services/UsuarioService';
 
 const Login = () => {
+
+
 
     const navigate = useNavigate();
 
@@ -20,6 +22,11 @@ const Login = () => {
         setFormData(formData => ({ ...formData, [name]: value }))
     }
 
+    useEffect(()=>{
+      const userJson = localStorage.getItem("user");
+      console.log(userJson);
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessage("");
@@ -27,9 +34,13 @@ const Login = () => {
         UsuarioService.signin(formData.email, formData.password).then(
             () => {
                 const userJson = localStorage.getItem("user");
+                console.log(userJson);
                 const user = JSON.parse(userJson || '{}');
+                // TODO - Definir nível de acesso 
+
                 if (user.statusUsuario == 'ATIVO') {
-                    navigate('/analytics');
+                    
+                    navigate('/analytics', {state:{user: userJson}});
                 } else if (user.statusUsuario == 'TROCAR_SENHA') {
                     navigate(`/newpass/` + user.id);
                     //window.location.reload(); ordnael@email.com.br

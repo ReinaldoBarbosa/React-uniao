@@ -1,7 +1,7 @@
 
 
 import { Layout, Button, Flex } from 'antd'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 import SideBar from '../../components/SideBar/SideBar';
 import CustomHeader from '../../components/Header/Header';
@@ -12,13 +12,34 @@ import ViewPage from '../ListPage/ViewPage'
 import './App.css'
 import MainContent from '../../components/Analytics/MainContent';
 import SideContent from '../../components/Analytics/SideContent';
-
+import { useLocation } from 'react-router-dom';
 
 const {Sider, Header, Content} = Layout;
 
 
 const App = () => {
+  //const [nivel, setNivel] = useState("ONG");
 
+  const objetoLogin = useLocation();
+  const nivel = JSON.parse(objetoLogin.state.user).nivelAcesso;
+
+  const PaginaBranca = () =>{
+    return(<>
+      <div>
+        página branca para ONG
+      </div>
+    </>)
+  }
+
+  useEffect(()=>{
+    console.log(JSON.parse(objetoLogin.state.user).nivelAcesso)
+
+  })
+
+  useEffect(()=>{
+    console.log(nivel)
+    console.log(objetoLogin)
+  }, [])
 
   const [collapsed, setCollapsed] = useState(false); 
 
@@ -37,8 +58,7 @@ const App = () => {
       </Header>
       <Content className='content'>
         <Flex gap="large">
-          <MainContent/>
-          <SideContent/>
+        {(nivel == "ADM") ? <MainContent/> : <PaginaBranca/>}
         </Flex>
       </Content>
     </Layout>
