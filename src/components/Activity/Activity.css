@@ -8,3 +8,22 @@
     box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
     border-radius: 10px;
 }
+
+.list-item {
+    padding: 10px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  
+  .list-item-meta {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    margin-right: 10px;
+  }
+  
+  .title {
+    font-weight: bold;
+  }
+  

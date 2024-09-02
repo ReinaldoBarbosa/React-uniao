@@ -30,7 +30,7 @@ const SideBar = () => {
                 label: 'Deshboard',
                 children: [
                     {
-                        key: '/home',
+                        key: '/analytics',
                         label: 'Analytics'
                     },
                 ],

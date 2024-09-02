@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import UsuarioService from "../../services/UsuarioService"
 import './Usuario.css'
-import { Button, Flex, Layout } from 'antd'
+import { Button, Flex, Layout, Typography } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import Widget from '../../components/Widget/Widget'
 
 
 
@@ -52,13 +53,37 @@ const Usuario = () => {
                 <CustomHeader/>
             </Header>
             <Content className='content'>
-                <Flex gap="large">
+
+                <div className="header_user">
+                    <Typography.Title>
+                        Monitore os usuarios da sua <span className='txt-green'>plataforma</span>
+                    </Typography.Title>
+
+                    <div className="widgets">
+                        <Widget type="Total"/>
+                        <Widget type="Abandono"/>
+                    </div>
+                </div>
+           
                 <div className="d-flex">
                     
                     <div className="p-3 w-100">
                 
                         <section className="m-2 p-2 shadow-lg">
                             <div className="table-container ">
+                                <div className="top_table">
+
+                                    <Typography.Title className='title-user'>
+                                        Usuarios
+                                    </Typography.Title>
+                                
+                                    <button className='new-user-btn' type='submit'>
+                                        Novo usaurios
+                                    </button>
+                             
+
+                                </div>
+                                
                                 <table>
                                     <thead>
                                         <tr>
@@ -91,7 +116,6 @@ const Usuario = () => {
                         </section>
                     </div>
                 </div>
-                </Flex>
             </Content>
         </Layout>
   </Layout>

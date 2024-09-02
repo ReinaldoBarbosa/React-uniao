@@ -29,7 +29,7 @@ const Login = () => {
                 const userJson = localStorage.getItem("user");
                 const user = JSON.parse(userJson || '{}');
                 if (user.statusUsuario == 'ATIVO') {
-                    navigate('/home');
+                    navigate('/analytics');
                 } else if (user.statusUsuario == 'TROCAR_SENHA') {
                     navigate(`/newpass/` + user.id);
                     //window.location.reload(); ordnael@email.com.br
@@ -50,7 +50,29 @@ const Login = () => {
         );
     };  
 
+    const inputs = document.querySelectorAll('.input');
+
+        
+
+        function focusFunc(){
+            let parent = this.parentNode.parentNode;
+            parent.classList.add('focus')
+        }
+
+        function blurFunc(){
+            let parent = this.parentNode.parentNode;
+            if(this.value == ""){
+                parent.classList.remove('focus')
+            }
+        }
+
+        inputs.forEach(input =>{
+            input.addEventListener('focus',focusFunc);
+            input.addEventListener('blur',blurFunc);
+        })    
+
   return (
+    
     <div>
       <img className="wave" src={Wave} alt="onda decorativa"/>
       <div className="container-login">
@@ -108,25 +130,6 @@ const Login = () => {
   );
 };
 
-const inputs = document.querySelectorAll('.input');
 
-        
-
-        function focusFunc(){
-            let parent = this.parentNode.parentNode;
-            parent.classList.add('focus')
-        }
-
-        function blurFunc(){
-            let parent = this.parentNode.parentNode;
-            if(this.value == ""){
-                parent.classList.remove('focus')
-            }
-        }
-
-        inputs.forEach(input =>{
-            input.addEventListener('focus',focusFunc);
-            input.addEventListener('blur',blurFunc);
-        })
 
 export default Login;

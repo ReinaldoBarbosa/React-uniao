@@ -96,32 +96,9 @@
     color: rgb(182, 181, 181) !important;
 }
 
-/*---- PLANT LISTS ----*/
-
-.plant-card
-{
-    flex: 1;
-    height: 250px;
-    text-align: center;
-}
 
 /*---- SELLER LIST ----*/
 
-.top-seller,.featured-seller
-{
-    flex: 1;
-}
-
-.divider
-{
-    border: 2px solid greenyellow;
-    height: 50px;
-}
-
-.card
-{
-    background-image: linear-gradient(to bottom, #4c7f79, #87e8de);
-}
 
 .header_search
 {

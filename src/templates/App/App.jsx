@@ -25,7 +25,7 @@ const App = () => {
   return (
 
 
-    <Layout classNane="body">
+    <Layout className="body">
     <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
       <SideBar/>
 

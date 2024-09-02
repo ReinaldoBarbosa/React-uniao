@@ -1,12 +1,15 @@
-.body{
-  min-height: 100vh;
+.header_user
+{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
 }
 
-.content {
-  padding: 24px;
-  background-color: #f0f2f5;
-  width: 100%; /* Garante que o conteúdo ocupe 100% da largura disponível */
+.txt-green
+{
+  color: #30CE99;
 }
+
 
 .flex {
   display: flex;
@@ -17,8 +20,6 @@
 
 .table-container {
     width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -82,15 +83,14 @@
   }
   
   .new-user-btn {
-    background-color: #2ecc71;
+    background-color: #48DEAD;
     color: #fff;
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 5px;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    display: inline-block;
     margin-bottom: 20px;
   }
   
@@ -98,3 +98,16 @@
     background-color: #27ae60;
   }
   
+  .top_table{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 20px;
+   
+  }
+
+  .title-user {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
