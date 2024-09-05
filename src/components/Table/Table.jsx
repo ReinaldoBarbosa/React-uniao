@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import UsuarioService from "../../services/UsuarioService"
 import '../../templates/Usuarios/Usuario.css'
 import { Typography } from 'antd'
+import CandidaturaServices from '../../services/CandidaturaServices'
 
 
 
@@ -15,13 +16,13 @@ const PerfilRevision = () => {
         navigate('/usuarioeditar')
     }
 
-    const [usuarios, setUsuarios] = useState([]);
+    const [candidaturas, setCandidaturas] = useState([]);
 
     useEffect(() => {
-        UsuarioService.findAll().then(
+        CandidaturaServices.findAll().then(
             (response) => {
-                const usuarios = response.data;
-                setUsuarios(usuarios);
+                const candidaturas = response.data;
+                setCandidaturas(candidaturas);
             }
         ).catch((error) => {
             console.log(error);
@@ -30,6 +31,8 @@ const PerfilRevision = () => {
 
     const editar = (id) => {
         navigate(`/usuarioeditar/` + id)
+
+        
     }
 
     return (
@@ -56,18 +59,27 @@ const PerfilRevision = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {usuarios?.map((usuario) => (
-                                            <tr className="" key={usuario.id}>
-                                                <td>{usuario.nome}</td>
-                                                <td>{usuario.email}</td>
-                                                <td>{usuario.nivelAcesso}</td>                               
-                                                <td>
-                                                    <button onClick={() => editar(usuario.id)}>
-                                                        :
-                                                    </button>
-                                                </td>
+                                    {candidaturas?.length > 0 ? (
+                                        candidaturas.map((candidatura) => (
+                                            <tr key={candidatura.id}>
+                                            <td>{candidatura.usuario?.nome}</td>
+                                            <td>{candidatura.usuario?.email}</td>
+                                            <td>{candidatura.evento?.ong?.nome}</td>
+                                            <td>{candidatura.evento?.nome}</td>
+                                            
+                                        
+                                            <td>
+                                                <button onClick={() => editar(candidatura.id)}>
+                                                :
+                                                </button>
+                                            </td>
                                             </tr>
-                                        ))}
+                                        ))
+                                        ) : (
+                                        <tr>
+                                            <td colSpan="5">Nenhuma candidatura encontrada.</td>
+                                        </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
