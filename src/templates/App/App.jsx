@@ -18,28 +18,6 @@ const {Sider, Header, Content} = Layout;
 
 
 const App = () => {
-  //const [nivel, setNivel] = useState("ONG");
-
-  const objetoLogin = useLocation();
-  const nivel = JSON.parse(objetoLogin.state.user).nivelAcesso;
-
-  const PaginaBranca = () =>{
-    return(<>
-      <div>
-        página branca para ONG
-      </div>
-    </>)
-  }
-
-  useEffect(()=>{
-    console.log(JSON.parse(objetoLogin.state.user).nivelAcesso)
-
-  })
-
-  useEffect(()=>{
-    console.log(nivel)
-    console.log(objetoLogin)
-  }, [])
 
   const [collapsed, setCollapsed] = useState(false); 
 
@@ -58,7 +36,8 @@ const App = () => {
       </Header>
       <Content className='content'>
         <Flex gap="large">
-        {(nivel == "ADM") ? <MainContent/> : <PaginaBranca/>}
+        <MainContent/>
+        <SideContent/>
         </Flex>
       </Content>
     </Layout>
