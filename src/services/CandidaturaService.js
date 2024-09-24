@@ -11,22 +11,28 @@ const findById = (id) => {
 
 const create = data => {
     const formData = new FormData();
-    formData.append('usuario', data.usuario);
-    formData.append('evento', data.evento);
-  
+    formData.append('emissorMensagem', data.emissorMensagem);
+    formData.append('email', data.email);
+    formData.append('telefone', data.telefone);
+    formData.append('texto', data.texto);
+
     return http.mainInstance.post(API_URL + "create", formData);
 };
 
-const admitido = (id) => {
+const inativar = (id) => {
     return http.mainInstance.put(API_URL + `inativar/${id}`);
 };
 
+const marcarComoLida = (id) => {
+    return http.mainInstance.put(API_URL + `marcarComoLida/${id}`);
+};
 
-const CandidaturaServices = {
+const MensagemService = {
     findAll,
     findById,
     create,
-    admitido
+    inativar,
+    marcarComoLida,
 }
 
-export default CandidaturaServices;
+export default MensagemService;

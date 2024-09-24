@@ -43,7 +43,7 @@ body
     text-align: center;
 }
 
-form
+.form_login
 {
     width: 360px;
 }

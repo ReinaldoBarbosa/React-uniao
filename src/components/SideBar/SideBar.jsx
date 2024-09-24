@@ -4,7 +4,10 @@ import { FaLeaf } from 'react-icons/fa6'
 import {UserOutlined, HomeOutlined, MailOutlined,CalendarOutlined} from '@ant-design/icons'
 import Uniao from '../../assets/img/uniao.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import UsuarioService from '../../services/UsuarioService';
 const SideBar = () => {
+
+    
 
     const data = [
         {
@@ -58,33 +61,33 @@ const SideBar = () => {
             
         },
         {
-            key: '4',
+            key: '/usuarios',
             icon: <UserOutlined/>,
             label: 'Usuário',
             children: [
                 {
                     key: '/user',
-                    label: 'Ong',
+                    label: 'Usuarios',
                 },
                 {
-                    key: '6',
-                    label: 'Voluntario',
+                    key: '/revisao',
+                    label: 'Perfil Revisão',
                 },
             ]
         },
         
         {
-            key: '7',
+            key: '/evento',
             label: 'Evento',
             icon: <CalendarOutlined />,
             children: [
                 {
 
-                    key: '/listpage',
-                    label: 'List Page',
+                    key: '/eventos',
+                    label: 'Eventos',
                 },
                 {
-                    key: '9',
+                    key: '/solicitacao',
                     label: 'Solicitções',
                 }
             ]
@@ -92,15 +95,23 @@ const SideBar = () => {
         
     ]
 
+    
+
     const objetoLogin = useLocation();
-    const nivel = JSON.parse(objetoLogin.state.user).nivelAcesso;
+    const user = UsuarioService.getCurrentUser();
+    const nivel = user.nivelAcesso;
 
     const items = nivel === 'ADM' ? dataAdm : data;
   
 
     const navigate = useNavigate();
+
+
+    
     
   return (
+
+
     <>
      <Flex align='center' justify='center'>
         <div className="logo">
@@ -118,14 +129,9 @@ const SideBar = () => {
         }}
         items={items}
         />
+
     </>
   )
-}
-
-function Content (){
-    return (
-        <div>Content</div>
-    )
 }
 
 export default SideBar

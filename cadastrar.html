@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+  </head>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+
+    .img {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 6rem;
+    }
+
+    .img img {
+      width: 600px;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 15px;
+    }
+
+    .container .title {
+      font-size: 25px;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .container .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+
+    .container form .user-detalis {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    form .user-detalis .input-box {
+      margin: 20px 0 12px 0;
+      width: calc(100% / 2 - 20px);
+    }
+
+    .user-detalis .input-box .detalis {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .user-detalis .input-box input {
+      height: 45px;
+      width: 100%;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding-left: 15px;
+      font-size: 16px;
+    }
+
+    .user-detalis .input-box input:focus,
+    .user-detalis .input-box input:valid {
+      border-color: #51c49e;
+    }
+
+    form input[type="radio"] {
+      display: flex;
+    }
+
+    form .button {
+      height: 45px;
+      margin: 45px 0;
+    }
+
+    form .button input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 5px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+    form .button a {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+    form .button input:hover {
+      background: linear-gradient(-135deg, #87ffd7, #51c49e);
+    }
+
+    .span {
+      font-size: 12px;
+      margin: 3px 0 0 1px;
+      color: #e63636;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .wave {
+        height: 50%;
+      }
+      .img {
+        display: none;
+      }
+
+      .login-container {
+        padding: 100px 20px;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="img">
+      <img src="../../image/Mobile login-rafiki.svg" />
+    </div>
+
+    <div class="container">
+      <div class="title">Cadastro</div>
+      <form
+        id="form"
+        th:action="@{/ong/add-ong}"
+        th:object="${ong}"
+        method="post"
+        autocomplete="off"
+      >
+        <div class="user-detalis">
+          <div class="input-box">
+            <span class="detalis">Nome da Ong</span>
+            <input
+              th:field="*{nome}"
+              class="required"
+              type="text"
+              placeholder="Digite seu nome da ong"
+              required
+              oninput="validaNome()"
+            />
+            <span class="span">Nome deve ter no minimo 3 caracteris</span>
+          </div>
+
+          <div class="input-box">
+            <span class="detalis">Email</span>
+            <input
+              th:field="*{email}"
+              class="required"
+              type="email"
+              placeholder="Digite seu email"
+              minlength="14"
+              required
+              oninput="validateEmail()"
+            />
+            <span class="span">Email Invalido</span>
+          </div>
+
+          <div class="input-box">
+            <span class="detalis">Telefone</span>
+            <input
+              th:field="*{telefone}"
+              id="telefone"
+              class="required"
+              type="tel"
+              placeholder="(xx) xxxxx-xxxx"
+              required
+              oninput="telefone_validation()"
+            />
+            <span class="span">Telefone Invalido</span>
+          </div>
+
+          <div class="input-box">
+            <span class="detalis">CNPJ</span>
+            <input
+              th:field="*{cnpj}"
+              class="required"
+              type="text"
+              placeholder="Digite o CNPJ"
+              required
+              oninput="validaCNPJ()"
+            />
+            <span class="span">CNPJ Invaldo</span>
+          </div>
+
+          <div class="input-box">
+            <span class="detalis">Senha</span>
+            <input
+              th:field="*{senha}"
+              class="required"
+              type="password"
+              placeholder="Digite uma senha segura"
+              pattern="(?=(.*[0-9]))((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=/*[a-z]))^.{8,}$"
+              required
+              oninput="validacaoSenha()"
+            />
+            <span class="span">Senha deve ter no minimo 8 caracteres</span>
+          </div>
+
+          <div class="input-box">
+            <span class="detalis">Confirma Senha</span>
+            <input
+              type="password"
+              class="required"
+              placeholder="Digite novamente sua senha"
+              required
+              oninput="compareSenha()"
+            />
+            <span class="span">A senha deve ser correspontende</span>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Cadastrar" />
+        </div>
+
+        <div class="button">
+          <a th:href="@{/uniao-voluntaria/ong}">Voltar</a>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const senha = document.getElementById("form");
+    const telefone = document.getElementById("telefone");
+    const campos = document.querySelectorAll(".required");
+    const spans = document.querySelectorAll(".span");
+
+    function setError(index) {
+      campos[index].style.border = "2px solid #e63636";
+      spans[index].style.display = "block";
+    }
+
+    function removeError(index) {
+      campos[index].style.border = "2px solid #51C49E";
+      spans[index].style.display = "none";
+    }
+
+    function validaNome() {
+      if (campos[0].value.length < 3) {
+        setError(0);
+      } else {
+        removeError(0);
+      }
+    }
+
+    function validateEmail() {
+      var re = /\S+@\S+\.\S+/;
+
+      if (!re.test(campos[1].value)) {
+        setError(1);
+      } else {
+        removeError(1);
+      }
+    }
+
+    function telefone_validation(telefone) {
+      //criando variavel e add um atributo
+
+      //retira todos os caracteres menos os numeros
+      telefone = telefone.replace(/\D/g, "");
+
+      //verifica se tem a qtde de numero correto
+      if (!(telefone.length >= 10 && telefone.length <= 11))
+        console.log("Invalido");
+
+      //Se tiver 11 caracteres, verificar se começa com 9 o celular
+      if (telefone.length == 11 && parseInt(telefone.substring(2, 3)) != 9)
+        console.log("Invalido");
+
+      //verifica se não é nenhum numero digitado errado (propositalmente)
+      for (var n = 0; n < 10; n++) {
+        //um for de 0 a 9.
+        //estou utilizando o metodo Array(q+1).join(n) onde "q" é a quantidade e n é o
+        //caractere a ser repetido
+        if (
+          telefone == new Array(11).join(n) ||
+          telefone == new Array(12).join(n)
+        )
+          console.log("Invalido");
+      }
+      //DDDs validos
+      var codigosDDD = [
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34,
+        35, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62,
+        64, 63, 65, 66, 67, 68, 69, 71, 73, 74, 75, 77, 79, 81, 82, 83, 84, 85,
+        86, 87, 88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+      ];
+      //verifica se o DDD é valido (sim, da pra verificar rsrsrs)
+      if (codigosDDD.indexOf(parseInt(telefone.substring(0, 2))) == -1)
+        console.log("Invalido");
+
+      //  E por ultimo verificar se o numero é realmente válido. Até 2016 um celular pode
+      //ter 8 caracteres, após isso somente numeros de telefone e radios (ex. Nextel)
+      //vão poder ter numeros de 8 digitos (fora o DDD), então esta função ficará inativa
+      //até o fim de 2016, e se a ANATEL realmente cumprir o combinado, os numeros serão
+      //validados corretamente após esse período.
+      //NÃO ADICIONEI A VALIDAÇÂO DE QUAIS ESTADOS TEM NONO DIGITO, PQ DEPOIS DE 2016 ISSO NÃO FARÁ DIFERENÇA
+      //Não se preocupe, o código irá ativar e desativar esta opção automaticamente.
+      //Caso queira, em 2017, é só tirar o if.
+      if (new Date().getFullYear() < 2017) return true;
+      if (
+        telefone.length == 10 &&
+        [2, 3, 4, 5, 7].indexOf(parseInt(telefone.substring(2, 3))) == -1
+      )
+        console.log("Invalido");
+
+      //se passar por todas as validações acima, então está tudo certo
+      console.log("Valido");
+    }
+
+    //chamada simples
+    //telefone_validation("(11)99000-3777"); // retorna true
+    //telefone_validation("11-99000-3777"); // retorna true
+    //telefone_validation("11990003777"); // retorna true
+    //telefone_validation("1111111111"); // retorna false
+    //telefone_validation("1111111111"); // retorna false
+    //telefone_validation("(01)3444-4444"); // retorna false
+    //telefone_validation("(01)43444-4444"); // retorna false
+
+    function validacaoSenha() {
+      if (campos[4].value.length < 8) {
+        setError(4);
+      } else {
+        removeError(4);
+      }
+    }
+
+    function compareSenha() {
+      if (campos[4].value == campos[5].value && campos[5].value.length >= 8) {
+        removeError(5);
+      } else {
+        setError(5);
+      }
+    }
+
+    function validaCNPJ() {
+      if (campos[3].value <= 14) {
+        setError(3);
+      } else {
+        removeError(3);
+        validarCNPJ();
+      }
+    }
+
+    const cnpj = "88.798.249/0001-35";
+
+    function validarCNPJ(cnpj) {
+      let numeros = cnpj.split("-")[0].replace(/[.|\/]/g, "");
+      console.log(numeros);
+      let digitos = cnpj.split("-")[1];
+      console.log(digitos);
+
+      if (getPrimeiroDigito(numeros) != digitos[0]) setError(3);
+
+      if (getSegundoDigito(numeros + "" + digitos[0]) != digitos[1])
+        setError(3);
+      else {
+        removeError(3);
+      }
+    }
+
+    function getPrimeiroDigito(numeros) {
+      let peso = 2;
+      let resultado = 0;
+      for (let i = numeros.length - 1; i >= 0; i--) {
+        resultado += numeros[i] * peso;
+        console.log(numeros[i] + " + " + peso + " = " + resultado);
+        peso = peso == 9 ? 2 : peso + 1;
+      }
+
+      modulo = resultado % 11;
+      console.log(modulo);
+      resultado = modulo < 2 ? 0 : 11 - modulo;
+      console.log(resultado);
+      return resultado;
+    }
+
+    function getSegundoDigito(numeros) {
+      let peso = 2;
+      let resultado = 0;
+      for (let i = numeros.length - 1; i >= 0; i--) {
+        resultado += numeros[i] * peso;
+        console.log(numeros[i] + " + " + peso + " = " + resultado);
+        peso = peso == 9 ? 2 : peso + 1;
+      }
+
+      modulo = resultado % 11;
+      console.log(modulo);
+      resultado = modulo < 2 ? 0 : 11 - modulo;
+      console.log(resultado);
+      return resultado;
+    }
+
+    console.log(validarCNPJ());
+  </script>
+</html>

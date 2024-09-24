@@ -392,7 +392,9 @@ const Principal = () => {
                     <br />
                     <div className="featured-text-btn on">
                         <a className="sop" href="#ongs">
-                        <button className="btn blue-btn">Cadastrar-se</button>
+                        <button className="btn blue-btn">
+                          <Link to={'/cadastro'}>Cadastrar-se</Link>
+                        </button>
                         </a>
                     </div>
                     </div>

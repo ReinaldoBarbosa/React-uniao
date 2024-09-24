@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, Button, Flex, List, Typography } from 'antd'
+import { AutoComplete, Avatar, Button, Flex, List, Typography } from 'antd'
 import './Activity.css'
 import UsuarioService from '../../services/UsuarioService';
 import Usuario from '../../templates/Usuarios/Usuario';
@@ -35,7 +35,7 @@ const Activity = () => {
         </Flex>
 
 
-            <List pagination={{pageSize: 15}} dataSource={usuarios}  renderItem={(user, index) => (
+            <List  dataSource={usuarios}  renderItem={(user, index) => (
                 <List.Item className="list-item-meta">
 
                     <List.Item.Meta

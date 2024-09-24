@@ -1,6 +1,6 @@
 import { Card, Flex, Image, Typography } from 'antd'
 import React from 'react'
-import plant from '../assets/plant02.png'
+
 
 const ContentSide = () => {
   return (

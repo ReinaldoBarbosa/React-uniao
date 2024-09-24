@@ -92,7 +92,7 @@ const Login = () => {
         </div>
 
         <div className="login-container">
-          <form action="" onSubmit={handleSubmit}>
+          <form className='form_login' action="" onSubmit={handleSubmit}>
             <img className="avatar" src={Avatar} alt="avatar do usuário"/>
             <h2>Bem-vindo</h2>
             

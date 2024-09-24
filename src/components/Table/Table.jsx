@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import UsuarioService from "../../services/UsuarioService"
+import { useLocation, useNavigate } from "react-router-dom"
+import CandidaturaService from "../../services/CandidaturaService"
 import '../../templates/Usuarios/Usuario.css'
 import { Typography } from 'antd'
-import CandidaturaServices from '../../services/CandidaturaServices'
 
 
 
 const PerfilRevision = () => {
 
-
-    const navigate = useNavigate();
-
-    const goTo = () => {
-        navigate('/usuarioeditar')
-    }
-
     const [candidaturas, setCandidaturas] = useState([]);
 
     useEffect(() => {
-        CandidaturaServices.findAll().then(
+        CandidaturaService.findAll().then(
             (response) => {
                 const candidaturas = response.data;
                 setCandidaturas(candidaturas);
@@ -28,12 +20,6 @@ const PerfilRevision = () => {
             console.log(error);
         })
     }, []);
-
-    const editar = (id) => {
-        navigate(`/usuarioeditar/` + id)
-
-        
-    }
 
     return (
         <div className="d-flex">
@@ -59,8 +45,9 @@ const PerfilRevision = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {candidaturas?.length > 0 ? (
-                                        candidaturas.map((candidatura) => (
+
+                                   {/*  {nivel === "PENDENTE" ? ( */}
+                                        {candidaturas.map((candidatura) => (
                                             <tr key={candidatura.id}>
                                             <td>{candidatura.usuario?.nome}</td>
                                             <td>{candidatura.usuario?.email}</td>
@@ -74,12 +61,13 @@ const PerfilRevision = () => {
                                                 </button>
                                             </td>
                                             </tr>
-                                        ))
-                                        ) : (
+                                        ))}
+                                      {/*   ) : (
                                         <tr>
                                             <td colSpan="5">Nenhuma candidatura encontrada.</td>
-                                        </tr>
-                                        )}
+                                        </tr> */}
+                                    
+                                
                                     </tbody>
                                 </table>
                             </div>
@@ -88,5 +76,7 @@ const PerfilRevision = () => {
         </div>
     )
 }
+
+
 
 export default PerfilRevision

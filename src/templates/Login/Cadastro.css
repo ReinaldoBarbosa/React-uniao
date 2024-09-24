@@ -1,0 +1,137 @@
+
+
+    .body_cad {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+
+    .img {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 6rem;
+    }
+
+    .img img {
+      width: 600px;
+    }
+
+    .container_cad {
+      max-width: 700px;
+      width: 100%;
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 15px;
+    }
+
+    .container_cad .title {
+      font-size: 25px;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .container_cad .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+
+    .container_cad form .user-detalis {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    form .user-detalis .input-box {
+      margin: 20px 0 12px 0;
+      width: calc(100% / 2 - 20px);
+    }
+
+    .user-detalis .input-box .detalis {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .user-detalis .input-box input {
+      height: 45px;
+      width: 100%;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding-left: 15px;
+      font-size: 16px;
+    }
+
+    .user-detalis .input-box input:focus,
+    .user-detalis .input-box input:valid {
+      border-color: #51c49e;
+    }
+
+    form input[type="radio"] {
+      display: flex;
+    }
+
+    form .button {
+      height: 45px;
+      margin: 45px 0;
+    }
+
+    form .button input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 5px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+    form .button a {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #87ffd7, #51c49e);
+    }
+    form .button input:hover {
+      background: linear-gradient(-135deg, #87ffd7, #51c49e);
+    }
+
+    .span {
+      font-size: 12px;
+      margin: 3px 0 0 1px;
+      color: #e63636;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .wave {
+        height: 50%;
+      }
+      .img {
+        display: none;
+      }
+
+      .login-container {
+        padding: 100px 20px;
+      }
+    }
