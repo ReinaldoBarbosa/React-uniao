@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import UsuarioService from "../../services/UsuarioService"
 import './Usuario.css'
 import { Button, Flex, Layout, Typography } from 'antd'
@@ -7,7 +7,7 @@ import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import {MenuUnfoldOutlined, MenuFoldOutlined, EditOutlined} from '@ant-design/icons'
 import Widget from '../../components/Widget/Widget'
 
 
@@ -36,6 +36,9 @@ const Usuario = () => {
 
     const editar = (id) => {
         navigate(`/usuarioeditar/` + id)
+    }
+    const detalis = (id) => {
+        navigate(`/perfil1/` + id)
     }
 
     const [collapsed, setCollapsed] = useState(false); 
@@ -77,13 +80,14 @@ const Usuario = () => {
                                         Usuarios
                                     </Typography.Title>
                                 
+                                <Link to={'/novoUser'}>
                                     <button className='new-user-btn' type='submit'>
                                         Novo usaurios
                                     </button>
-                             
+                                </Link>
 
                                 </div>
-                                
+                                <div className="table-wrapper">
                                 <table>
                                     <thead>
                                         <tr>
@@ -98,20 +102,23 @@ const Usuario = () => {
                                     <tbody>
                                         {usuarios?.map((usuario) => (
                                             <tr className="" key={usuario.id}>
-                                                <td>{usuario.nome}</td>
+                                               
+                                                <td className="user_detalis" onClick={() => detalis(usuario.id)} >{usuario.nome}</td>
                                                 <td>{usuario.dataCadastro}</td>
                                                 <td>{usuario.email}</td>
                                                 <td>{usuario.nivelAcesso}</td>                               
                                                 <td>{usuario.statusUsuario}</td>
+                                                
                                                 <td>
                                                     <button onClick={() => editar(usuario.id)}>
-                                                        :
+                                                    <EditOutlined />
                                                     </button>
-                                                </td>
+                                                </td>                            
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                         </section>
                     </div>

@@ -111,3 +111,8 @@
     font-weight: bold;
     margin: 0;
 }
+
+.user_detalis
+{
+  cursor: pointer;
+}

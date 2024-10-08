@@ -5,16 +5,51 @@ import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import './Perfil.css'
 import EventoService from "../../services/EventoService"
 
 import Ft3 from '../../assets/img/PrincipalImg/ft3.jpeg';
 import eventoImg from '../../assets/img/imagem2.jpg';
+import UsuarioService from '../../services/UsuarioService'
 
 const PerfilVoluntario = () => {
 
+    const navigate = useNavigate();
+
+    const objectValues = {
+        nome: "",
+        email: "",
+        nivelAcesso: ""
+    };
+    
+    const [usuario, setUsuario] = useState(objectValues); 
+
+    const { id } = useParams();
+    const [formData, setFormData] = useState({});
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState();
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFormData(formData => ({ ...formData, [name]: value }));
+    }
+
+    useEffect(() => {
+        UsuarioService.findById(id).then(
+            (response) => {
+                const usuario = response.data;
+                setUsuario(usuario);
+                console.log(usuario);
+            }
+        ).catch((error) => {
+            console.log(error);
+        })
+
+    }, []);
+  
     const [eventos, setEventos] = useState([]);
 
     useEffect(() => {
@@ -29,6 +64,11 @@ const PerfilVoluntario = () => {
         
         })
     }, []);
+    
+
+    const goToAlterarSenha = () => {
+        navigate(`/usuarioalterarsenha/` + id);
+    }
 
 
     const [collapsed, setCollapsed] = useState(false); 
@@ -50,14 +90,14 @@ const PerfilVoluntario = () => {
                             <div class="profile-info">
                                 <img src={Ft3} alt="Profile Picture" class="profile-picture"/>
                                 <div className="profile-txt">
-                                <h2>Joel de Alcantara</h2>
-                                <p>Barueri, SP</p>
-                                <p>E-mail</p>
-                                <p>Telefone</p>
+                                <h2>{usuario.nome}</h2>
+                                <p>{usuario.email}</p>
+                                <p>{usuario.telefone}</p>   
                                 </div>
                             </div>
                             <div class="tabs">
                                 <div class="tab">Biografia</div>
+
                                 <div class="tab">Habilidades</div>
                             </div>
                             <h3 className='profile-title'>Eventos Realizados</h3>

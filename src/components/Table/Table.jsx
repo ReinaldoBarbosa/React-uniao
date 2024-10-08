@@ -48,6 +48,8 @@ const PerfilRevision = () => {
 
                                    {/*  {nivel === "PENDENTE" ? ( */}
                                         {candidaturas.map((candidatura) => (
+                                            candidatura.statusCadastro === "REPORT" ? (
+                                            
                                             <tr key={candidatura.id}>
                                             <td>{candidatura.usuario?.nome}</td>
                                             <td>{candidatura.usuario?.email}</td>
@@ -61,11 +63,14 @@ const PerfilRevision = () => {
                                                 </button>
                                             </td>
                                             </tr>
-                                        ))}
-                                      {/*   ) : (
-                                        <tr>
-                                            <td colSpan="5">Nenhuma candidatura encontrada.</td>
-                                        </tr> */}
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan="5">Nenhuma candidatura encontrada.</td>
+                                                </tr> 
+                                            )
+                                        ))
+                                    
+                                        }
                                     
                                 
                                     </tbody>

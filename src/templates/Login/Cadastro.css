@@ -27,6 +27,13 @@
       padding: 25px 30px;
       border-radius: 15px;
     }
+    .container_user {
+      
+      width: 100%;
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 15px;
+    }
 
     .container_cad .title {
       font-size: 25px;
@@ -69,9 +76,35 @@
       padding-left: 15px;
       font-size: 16px;
     }
+    .user-detalis .input-box  select {
+      height: 45px;
+      width: 204%;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding-left: 15px;
+      font-size: 16px;
+    }
+    .input-box .form-select select {
+      height: 45px;
+      width: 100%;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding-left: 15px;
+      font-size: 16px;
+    }
+    .container_user .user-detalis .input-box input {
+      width: 204%;  
+    }
 
     .user-detalis .input-box input:focus,
     .user-detalis .input-box input:valid {
+      border-color: #51c49e;
+    }
+    .input-box .form-select select:focus,
+    .input-box .form-select select:valid
+    {
       border-color: #51c49e;
     }
 

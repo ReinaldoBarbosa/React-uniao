@@ -23,7 +23,7 @@ const MainContent = () => {
             <Widget type="Abandono"/>
           </div>
 
-          <PerfilRevision/>
+         
         </Flex>
       </div>
     </>

@@ -114,6 +114,8 @@ const Cadastro = () => {
                                 <input type="password" className="required" placeholder="Digite novamente sua senha" name="confirmaSenha"/>
                                 <span className="span">A senha deve ser correspontende</span>    
                             </div>
+
+                            
                         </div>
                         <div className="button">
                             <input type="submit" value="Cadastrar"/>

@@ -22,6 +22,12 @@ const create = data => {
 const inativar = (id) => {
     return http.mainInstance.put(API_URL + `inativar/${id}`);
 };
+const ativar = (id) => {
+    return http.mainInstance.put(API_URL + `ativar/${id}`);
+};
+const reportar = (id) => {
+    return http.mainInstance.put(API_URL + `reportar/${id}`);
+};
 
 const marcarComoLida = (id) => {
     return http.mainInstance.put(API_URL + `marcarComoLida/${id}`);
@@ -32,6 +38,8 @@ const MensagemService = {
     findById,
     create,
     inativar,
+    ativar,
+    reportar,
     marcarComoLida,
 }
 

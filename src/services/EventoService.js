@@ -9,15 +9,23 @@ const findById = (id) => {
     return http.mainInstance.get(API_URL + `findById/${id}`);
 };
 
-const create = data => {
+const create = (file, data, email) => {
+    console.log(data.dataEvento);
+    
     const formData = new FormData();
-    formData.append('emissorMensagem', data.emissorMensagem);
-    formData.append('email', data.email);
-    formData.append('telefone', data.telefone);
-    formData.append('texto', data.texto);
+    formData.append('nome', data.nome);
+    formData.append('cep', data.cep);
+    formData.append('dataEvento', data.dataEvento);
+    formData.append('horaInicio', data.horaInicio);
+    formData.append('vagas', data.vagas);
+    formData.append('fotoEvento', file)
+    formData.append('numero', data.numero);
+    formData.append('infos', data.infos);
+    formData.append('statusEvento', data.statusEvento);
 
-    return http.mainInstance.post(API_URL + "create", formData);
+    return http.multipartInstance.post(API_URL + `create/${email}`, formData);
 };
+
 
 const inativar = (id) => {
     return http.mainInstance.put(API_URL + `inativar/${id}`);

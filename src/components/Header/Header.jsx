@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex, Typography, Avatar } from 'antd'
 import Search from 'antd/es/transfer/search'
 import {AppstoreOutlined, MoonOutlined, UserOutlined} from '@ant-design/icons'
@@ -10,15 +10,21 @@ import UsuarioService from '../../services/UsuarioService'
 const CustomHeader = () => {
 const user = UsuarioService.getCurrentUser();
  const id = user.id;
+
+ const [inputDate, setInputDate] = useState('')
+
+ const handleInputChange = (e) => {
+  setInputDate(e.target.value)
+}
   return (
     <>
       <Flex align='center' justify='center' gap="3rem" >
 
       <Search
-    placeholder="Digite algo"
-    size="large"
-    onSearch={(value) => console.log(value)}
-    className="custom-search"
+        placeholder="Digite algo"
+        size="large"
+        onSearch={(value) => console.log(value)}
+        className="custom-search"
   />
 
         <Flex align='center' gap="3rem">

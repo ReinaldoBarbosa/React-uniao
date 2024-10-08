@@ -65,8 +65,7 @@ const PerfilOng = () => {
         
         })
     }, []);
-
-
+    
 
     const goToAlterarSenha = () => {
         navigate(`/usuarioalterarsenha/` + id);

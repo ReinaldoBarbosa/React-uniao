@@ -42,6 +42,7 @@ const create = data => {
     formData.append('nome', data.nome);
     formData.append('email', data.email);
     formData.append('telefone', data.telefone);
+    formData.append('infos', data.infos);
     formData.append('cpf_cnpj', data.cpf_cnpj);
     formData.append('senha', data.senha);
     formData.append('nivelAcesso', data.nivelAcesso);
@@ -50,7 +51,13 @@ const create = data => {
 };
 
 const update = (id, data) => {
-    return http.multipartInstance.put(API_URL + `update/${id}`, data);
+    const formData = new FormData();
+    formData.append('nome', data.nome);
+    formData.append('email', data.email);
+    formData.append('telefone', data.telefone);
+    formData.append('cpf_cnpj', data.cpf_cnpj);
+    formData.append('nivelAcesso', data.nivelAcesso);
+    return http.mainInstance.put(API_URL + `update/${id}`, formData);
 };
 
 const alterarSenha = (id, data) => {

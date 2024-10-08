@@ -72,9 +72,14 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: #00b894;
+    color: #272727;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+
+  .tab_title
+  {
+    color: #00b894;
   }
   
   .tab:hover {

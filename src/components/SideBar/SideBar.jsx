@@ -29,11 +29,11 @@ const SideBar = () => {
             children: [
                 {
 
-                    key: '/listpage',
+                    key: '/eventos',
                     label: 'List Page',
                 },
                 {
-                    key: '9',
+                    key: '/solicitacao',
                     label: 'Solicitções',
                 }
             ]

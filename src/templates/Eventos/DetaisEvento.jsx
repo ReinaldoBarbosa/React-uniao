@@ -5,7 +5,7 @@ import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import './DetalisEvento.css'
 import EventoService from "../../services/EventoService"
@@ -15,19 +15,40 @@ import eventoImg from '../../assets/img/imagem2.jpg';
 
 const DetalisEvento = () => {
 
-    const [eventos, setEventos] = useState([]);
+    const navigate = useNavigate();
+
+    const objectValues = {
+        nome: "",
+        email: "",
+        nivelAcesso: "",
+        ong: "",
+    };
+    
+    const [evento, setEvento] = useState(objectValues); 
+
+    const { id } = useParams();
+    const [formData, setFormData] = useState({});
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState();
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFormData(formData => ({ ...formData, [name]: value }));
+    }
+
 
     useEffect(() => {
-        EventoService.findAll().then(
+        EventoService.findById(id).then(
             (response) => {
-                const eventos = response.data;
-                setEventos(eventos);
+                const evento = response.data;
+                setEvento(evento);
+                console.log(evento);
             }
         ).catch((error) => {
             console.log(error);
-
-        
         })
+
     }, []);
 
 
@@ -50,55 +71,25 @@ const DetalisEvento = () => {
                             <div class="profile-info">
 
                                 <div className="profile-txt">
-                                <h2>Entrega de cesta basica</h2>
-                                <p>Greenpeace</p>
+                                <h2>{evento.nome}</h2>
+                                <p>{evento.ong.nome}</p>
                                 </div>
                             </div>
                             <div class="tabs">
-                                <div class="tab">Biografia</div>
+                                <div class="tab">
+                                    
+                                    <h2 className='tab_title'>Informações</h2>
+
+                                    <p>{evento.infos}</p>
+                                </div>
+                                
                             </div>
-                            <h3 className='profile-title'>Ultimos Eventos</h3>
+                            <h3 className='profile-title'>Imagens</h3>
                             <div class="events">
                                 <div class="event-card">
                                 <img src="event-image.jpg" alt="Event"/>
-                                <div class="event-details">
-                                    <h4>Marcos Aurelio</h4>
-                                    <p>Sarinas, SP</p>
-                                    <p>Descrição do evento...</p>
                                 </div>
-                                </div>
-                                <div class="event-card">
-                                <img src="event-image.jpg" alt="Event"/>
-                                <div class="event-details">
-                                    <h4>Marcos Aurelio</h4>
-                                    <p>Sarinas, SP</p>
-                                    <p>Descrição do evento...</p>
-                                </div>
-                                </div>
-                                <div class="event-card">
-                                <img src="event-image.jpg" alt="Event"/>
-                                <div class="event-details">
-                                    <h4>Marcos Aurelio</h4>
-                                    <p>Sarinas, SP</p>
-                                    <p>Descrição do evento...</p>
-                                </div>
-                                </div>
-                                <div class="event-card">
-                                <img src="event-image.jpg" alt="Event"/>
-                                <div class="event-details">
-                                    <h4>Marcos Aurelio</h4>
-                                    <p>Sarinas, SP</p>
-                                    <p>Descrição do evento...</p>
-                                </div>
-                                </div>
-                                <div class="event-card">
-                                <img src="event-image.jpg" alt="Event"/>
-                                <div class="event-details">
-                                    <h4>Marcos Aurelio</h4>
-                                    <p>Sarinas, SP</p>
-                                    <p>Descrição do evento...</p>
-                                </div>
-                                </div>
+                                
                             </div>
                             </div>
 

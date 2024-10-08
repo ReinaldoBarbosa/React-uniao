@@ -12,6 +12,9 @@ import Eventos from '../templates/Eventos/Eventos'
 import PerfilVoluntario from '../templates/Perfil/PerfilVoluntario'
 import PerfilOng from '../templates/Perfil/PerfilOng'
 import DetalisEvento from '../templates/Eventos/DetaisEvento'
+import NovoUsuario from '../templates/Usuarios/NovoUsuario'
+import EditarUsuario from '../templates/Usuarios/EditarUsuario'
+import NovoEvento from '../templates/Eventos/NovoEvento'
 
 const AppRoutes = () => {
   return (
@@ -26,9 +29,12 @@ const AppRoutes = () => {
         <Route path='/cadastro' element={<Cadastro/>}></Route>
         <Route path='/Revisao' element={<PagPerfilRevisao/>}></Route> 
         <Route path='/solicitacao' element={<Solitacao/>}></Route> 
-        <Route path='/perfil1' element={<PerfilVoluntario/>}></Route> 
+        <Route path='/perfil1/:id' element={<PerfilVoluntario/>}></Route> 
         <Route path='/ongPerfil/:id' element={<PerfilOng/>}></Route> 
-        <Route path='/detalisEvento' element={<DetalisEvento/>}></Route> 
+        <Route path='/detalisEvento/:id' element={<DetalisEvento/>}></Route> 
+        <Route path='/novoUser' element={<NovoUsuario/>}></Route> 
+        <Route path='/novoEvento' element={<NovoEvento/>}></Route> 
+        <Route path='/usuarioeditar/:id' element={<EditarUsuario/>}></Route> 
       </Routes>
     </div>
   )

@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import CandidaturaService from "../../services/CandidaturaService"
 import { Button, Flex, Layout, Typography } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import {MenuUnfoldOutlined, MenuFoldOutlined, CheckOutlined, CloseOutlined, ExclamationCircleOutlined} from '@ant-design/icons'
 import Widget from '../../components/Widget/Widget'
+import './Solicitacao.css'
+import UsuarioService from '../../services/UsuarioService'
+
 
 const Solitacao = () => {
 
     const [candidaturas, setCandidaturas] = useState([]);
+
 
     useEffect(() => {
         CandidaturaService.findAll().then(
@@ -23,6 +27,23 @@ const Solitacao = () => {
             console.log(error);
         })
     }, []);
+
+
+    const ativar = (id) => {
+        CandidaturaService.ativar(id)
+        alert("Solicitação acetita")
+    }
+
+    const reportar = (id) => {
+        CandidaturaService.reportar(id)
+        alert("Solicitação reposrtada")
+    }
+    const inativar = (id) => {
+        CandidaturaService.reportar(id)
+        alert("Solicitação recusada")
+    }
+    const user = UsuarioService.getCurrentUser();
+    const userID = user.id;
 
     const [collapsed, setCollapsed] = useState(false); const [usuarios, setUsuarios] = useState([]);
 
@@ -72,28 +93,37 @@ const Solitacao = () => {
                                             <th scope="col">Voluntario</th>
                                             <th scope="col">E-mail</th>
                                             <th scope="col">Evento</th>                        
+                                            <th scope="col">Status</th>                        
                                             <th scope="col">Aceitação</th>                        
                                             <th scope="col">Mais</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {candidaturas.map((candidatura) => (
-                                            <tr key={candidatura.id}>
-                                            <td>{candidatura.usuario?.nome}</td>
-                                            <td>{candidatura.usuario?.email}</td>
-                                            <td>{candidatura.evento?.nome}</td>
-                                            <td><a href="#">A</a>
-                                                <a href="#">X</a>
-                                            </td>
+                                        {candidaturas?.length > 0 ? (
+                                            candidaturas.map((candidatura) => (
+                                                (candidatura.id === userID && candidatura.statusCadastro === "ATIVO") && (
+                                                <tr key={candidatura.id}>
+                                                <td>{candidatura.usuario?.nome}</td>
+                                                <td>{candidatura.usuario?.email}</td>
+                                                <td>{candidatura.evento?.nome}</td>
+                                                <td>{candidatura.statusCadastro}</td>
+
+                                                <td className='col_td'>
+                                                    <CheckOutlined className='icon_s check' onClick={() => ativar(candidatura.id)}/>
+                                                    <CloseOutlined className='icon_s close' onClick={() => inativar(candidatura.id)} />
+                                                </td>
+                                                
                                             
-                                        
-                                            <td>
-                                                <button onClick={() => editar(candidatura.id)}>
-                                                :
-                                                </button>
-                                            </td>
-                                            </tr>
-                                        ))}
+                                                <td className='col_td'>
+                                                    <ExclamationCircleOutlined className='icon_s report' onClick={() => reportar(candidatura.id)}/>
+                                                   
+                                                    
+                                                </td>
+                                                </tr>
+                                            )
+                                        ))):(
+                                            <h1>Nenhuma Solicitação</h1>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
