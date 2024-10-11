@@ -133,3 +133,9 @@
     color: gray;
   }
   
+  .img-content img
+  {
+    width: 600px; /* ajuste conforme necessário */
+    height: auto; /* mantém a proporção da imagem */
+    max-height: 500px; 
+  }

@@ -1,13 +1,19 @@
 import React from 'react'
-import {useState, useEffect } from 'react';
+import {useState, useEffect, useContext } from 'react';
 import MainContent from '../../components/Analytics/MainContent';
 import SideContent from '../../components/Analytics/SideContent'
 import { Flex, Typography } from 'antd'
 import Widget from '../../components/Widget/Widget';
 import PerfilRevision from '../../components/Table/Table';
+ // Importa o contexto de busca
+
 
 
 const Analytics = () => {
+
+
+  
+    
 
   return (
     <>
@@ -16,7 +22,7 @@ const Analytics = () => {
 
           <Flex vertical>
             <Typography.Title>
-               Monitore a saúde <br /> do seu negócio
+               Monitore a saúde <br /> do seu negócio 
             </Typography.Title>
             <span className='primary--color'>
             Controle seus e analise dados de uma maneira mais fácil
@@ -24,9 +30,11 @@ const Analytics = () => {
           </Flex>
 
           <div className="widgets">
-            <Widget type="Total"/>
-            <Widget type="Abandono"/>
+            <Widget type="TotalUser"/>
+            <Widget type="AbandonoUser"/>
           </div>
+
+          
 
           <PerfilRevision/>
         </Flex>

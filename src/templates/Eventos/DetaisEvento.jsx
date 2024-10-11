@@ -5,7 +5,7 @@ import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import './DetalisEvento.css'
 import EventoService from "../../services/EventoService"
@@ -58,7 +58,12 @@ const DetalisEvento = () => {
             <Layout classNane="body">
                 <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
                     <SideBar/>
-                    <Button type='text' ico={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> } onClick={() => setCollapsed(!collapsed)} className='triger-btn' />
+                    <Button
+                    type="text"
+                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    onClick={() => setCollapsed(!collapsed)}
+                    className="trigger-btn"
+                />
                 </Sider>
                 <Layout>
                     <Header className='header'>
@@ -67,7 +72,11 @@ const DetalisEvento = () => {
                     <Content className='content'>   
                         <div className="container-perfil">
                         <div class="profile">
-                            <div class="profile-header"></div>
+                            <div class="profile-header">
+                            
+                            <Link to={`/editarEvento/${id}`}> Editar</Link>
+                            <Link to={'/eventos'}> sssss</Link>
+                            </div>
                             <div class="profile-info">
 
                                 <div className="profile-txt">
@@ -86,8 +95,8 @@ const DetalisEvento = () => {
                             </div>
                             <h3 className='profile-title'>Imagens</h3>
                             <div class="events">
-                                <div class="event-card">
-                                <img src="event-image.jpg" alt="Event"/>
+                            <div className="img-content">
+                                    <img className="shadow-lg" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
                                 </div>
                                 
                             </div>

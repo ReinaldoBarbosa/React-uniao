@@ -49,8 +49,12 @@ const Usuario = () => {
         <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
         <SideBar/>
 
-        <Button type='text' ico={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> } onClick={() => setCollapsed(!collapsed)} className='triger-btn' />
-        </Sider>
+        <Button
+                    type="text"
+                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    onClick={() => setCollapsed(!collapsed)}
+                    className="trigger-btn"
+                />        </Sider>
         <Layout>
             <Header className='header'>
                 <CustomHeader/>
@@ -63,8 +67,8 @@ const Usuario = () => {
                     </Typography.Title>
 
                     <div className="widgets">
-                        <Widget type="Total"/>
-                        <Widget type="Abandono"/>
+                        <Widget type="TotalUser"/>
+                        <Widget type="AbandonoUser"/>
                     </div>
                 </div>
            

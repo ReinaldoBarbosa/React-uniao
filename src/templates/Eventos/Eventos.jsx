@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import EventoService from "../../services/EventoService"
-import { Button, Flex, Layout, Typography } from 'antd'
+import { Avatar, Button, Flex, Layout, Typography } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
@@ -8,7 +8,7 @@ import CustomHeader from '../../components/Header/Header'
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 
-import Ft3 from '../../assets/img/PrincipalImg/ft3.jpeg';
+
 import eventoImg from '../../assets/img/imagem2.jpg';
 
 import './Evento.css'
@@ -23,12 +23,14 @@ function Eventos() {
     }
 
     const [eventos, setEventos] = useState([]);
+    const [usuario, setUsuario] = useState({}); 
 
     useEffect(() => {
         EventoService.findAll().then(
             (response) => {
                 const eventos = response.data;
                 setEventos(eventos);
+                console.log(eventos);
             }
         ).catch((error) => {
             console.log(error);
@@ -59,11 +61,14 @@ function Eventos() {
                                     <a key={evento.id} onClick={() => editar(evento.id)}>
                                         <div className="card">
                                         <div className="top-header">
-                                            <img className="img_perfil" src={Ft3} alt="Imagem de perfil" />
-                                            <span className="author">{evento.ong.nome}</span>
+                                            <img className="img_perfil" src={evento.ong.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
+
+                                            
+                                            <span className="author">{evento.nome}</span>
+                                            <p >{evento.ong.nome}</p>
                                         </div>
                                         <div className="card-content">
-                                            <img src={evento.fotoEvento} className="img-evento" alt="Imagem do evento" />
+                                            <img src={evento.foto ? 'data:image/jpeg;base64,' + evento.foto : logo} className="img-evento" alt="..." />
                                             <p className="description">{evento.infos}</p>
                                         </div>
                                         </div>
@@ -90,13 +95,13 @@ function Eventos() {
                                 <a  onClick={() => editar(evento.id)}>
                                     <div className="card">
                                         <div className="top-header">
-                                            <img className="img_perfil" src={Ft3}/>
-                                            <span className="author">{evento.ong.nome}</span>
+                                        <img className="img_perfil" src={evento.ong?.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
+                                        <span className="author">{evento.ong.nome}</span>
                                         </div>
                                                         
                                         <div className="card-content">
-                                        <img src={evento.fotoEvento} className='img-evento' />
-                                            <p className="description">{evento.infos}</p>
+                                        <img className="shadow-lg" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
+                                        <p className="description">{evento.infos}</p>
                                         </div>
                                                         
                                     </div>
@@ -117,7 +122,12 @@ function Eventos() {
                 <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
                 <SideBar/>
 
-                <Button type='text' ico={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> } onClick={() => setCollapsed(!collapsed)} className='triger-btn' />
+                <Button
+                    type="text"
+                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    onClick={() => setCollapsed(!collapsed)}
+                    className="trigger-btn"
+                />
                 </Sider>
                 <Layout>
                     <Header className='header'>

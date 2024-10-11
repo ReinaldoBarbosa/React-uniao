@@ -2,7 +2,7 @@
 
 import { Layout, Button, Flex, Typography } from 'antd'
 import { useState, useEffect } from 'react'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import SideBar from '../../components/SideBar/SideBar';
 import CustomHeader from '../../components/Header/Header';
 import { Route, Routes, useNavigate } from 'react-router-dom'
@@ -26,6 +26,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const user = UsuarioService.getCurrentUser();
+  const [collapsed, setCollapsed] = useState(false); 
   const nivel = user.nivelAcesso;
   const userID = user.id;
 
@@ -134,7 +135,7 @@ const App = () => {
 
   
 
-  const [collapsed, setCollapsed] = useState(false); 
+
 
   
 
@@ -144,8 +145,12 @@ const App = () => {
     <Layout className="body">
     <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
       <SideBar/>
-
-      <Button type='text' ico={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> } onClick={() => setCollapsed(!collapsed)} className='triger-btn' />
+      <Button
+                    type="text"
+                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    onClick={() => setCollapsed(!collapsed)}
+                    className="trigger-btn"
+      />
     </Sider>
     <Layout>
       <Header className='header'>

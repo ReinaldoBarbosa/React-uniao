@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import bg from '../../assets/img/Login/cad.svg'
 import './Cadastro.css'
 import SideBar from '../../components/SideBar/SideBar'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import UsuarioService from '../../services/UsuarioService'
 
 const Cadastro = () => {
@@ -38,8 +38,8 @@ const Cadastro = () => {
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
-
-              navigate('/analytics');
+            const userJson = localStorage.getItem("user");
+            navigate('/analytics'),{state:{user: userJson}};
           
           }, (error) => {
               const message = error.response.data.message;
@@ -52,6 +52,32 @@ const Cadastro = () => {
     const userJson = localStorage.getItem("user");
     console.log(userJson);
   })
+
+    const senha = document.getElementById("form");
+    const telefone = document.getElementById("telefone");
+    const campos = document.querySelectorAll(".required");
+    const spans = document.getElementById("span");
+
+    function setError(index) {
+      campos[index].style.border = "2px solid #e63636";
+      spans[index].style.display = "block";
+    }
+
+    function removeError(index) {
+      campos[index].style.border = "2px solid #51C49E";
+      spans[index].style.display = "none";
+    }
+
+    const validaNome = () => {
+      if (campos[0].value.length < 3) {
+        setError(0);
+      } else {
+        removeError(0);
+      }
+    }
+
+   
+    
 
   return (
     <div className='body_cad'>
@@ -70,8 +96,9 @@ const Cadastro = () => {
                                 <span className="detalis">Nome da Ong</span>
                                 <input className="required" type="text" placeholder="Digite seu nome da ong"name="nome"
                                             value={formData.nome || ""}
+                                            
                                             onChange={handleChange}/>
-                                <span className="span">Nome deve ter no minimo 3 caracteris</span>
+                                <span id='span' className="span">Nome deve ter no minimo 3 caracteris</span>
                             </div>
 
                             <div className="input-box">
@@ -96,6 +123,7 @@ const Cadastro = () => {
                                 <span className="detalis">CNPJ</span>
                                 <input className="required" type="text" placeholder="Digite o CNPJ" name="cpf_cnpj"
                                             value={formData.cpf_cnpj || ""}
+                                            
                                             onChange={handleChange}/> 
                                 <span className="span">CNPJ Invaldo</span>    
 
@@ -122,7 +150,8 @@ const Cadastro = () => {
                         </div>
 
                         <div className="button">
-                            <a href="souOng.html">Voltar</a>
+                            
+                            <Link to={'/'}>Voltar</Link>
                         </div>
                     </>
                 )}

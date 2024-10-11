@@ -30,7 +30,12 @@
     margin-top: -70px;
   }
 
- 
+ .fotoPerfil
+ {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
 
   .profile-txt
   {
@@ -38,8 +43,8 @@
   }
 
   .profile-picture {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 5px solid white;
     object-fit: cover;

@@ -27,17 +27,14 @@ const ImageUploaderModal = ({ setFile, setImage, chosenImage }) => {
 
     return (
         <div>
-            <button type="button" className="btn btn-primary my-2"
-                data-bs-toggle="modal" data-bs-target="#imageModal">
-                {currentFile == undefined ? 'Escolher uma imagem' : 'Trocar a imagem'}
-            </button>
+            
 
             <div className="modal fade" id="imageModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Escolha a Imagem</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Imagem</h1>
+                            <button type="button"  data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <div className="img-card">
@@ -55,7 +52,7 @@ const ImageUploaderModal = ({ setFile, setImage, chosenImage }) => {
 
                                 {previewImage && (
                                     <div>
-                                        <img id="preView" className="rounded shadow d-block mx-auto img-fluid"
+                                        <img id="preView" className="img-preview"
                                             src={previewImage} alt="" />
                                     </div>
                                 )}
@@ -63,19 +60,13 @@ const ImageUploaderModal = ({ setFile, setImage, chosenImage }) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" onClick={deleteFile}
-                                className="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                                className="btn btn-warning" data-bs-dismiss="modal" >Cancelar</button>
                             <button type="button" onClick={confirmFile}
-                                className="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                                className="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Confirmar</button>
                         </div>
                     </div>
                 </div>
             </div>
-            {chosenImage && (
-                <div>
-                    <img id="preView" className="rounded shadow d-block mx-auto img-fluid"
-                        src={chosenImage} alt="" />
-                </div>
-            )}
         </div>
     );
 };

@@ -25,10 +25,11 @@ const ImageUploader = ({setFile}) => {
     return (
         <div className="img-card">
             <div className="d-flex">
-                <label htmlFor="uploadImage" className="btn-open-image">
+                <label htmlFor="uploadImage" className="btn-open-image"> 
                     <i className="bi bi-image"></i>
                     <input type="file" name="fotoEvento" accept="image/*" id="uploadImage" 
-                    onChange={selectFile} />
+                    onChange={selectFile}/>
+                   
                 </label>
                 <p className="fw-bold fst-italic d-block mx-auto">{ currentFile != null ? currentFile.name : 'Nenhum arquivo escolhido'}</p>
                 <button type="button" className="btn-close-image" onClick={deleteFile}>
@@ -38,7 +39,7 @@ const ImageUploader = ({setFile}) => {
 
             {previewImage && (
                 <div>
-                    <img id="preView" className="rounded shadow d-block mx-auto img-fluid"
+                    <img id="preView" className="img-preview"
                         src={previewImage} alt="..." />
                 </div>
             )}

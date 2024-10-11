@@ -2,6 +2,17 @@
     display: none;
 }
 
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    background-color: white;
+    box-shadow: 0 0px 8px rgb(6, 190, 107);
+    border-radius: 10px;
+    width: 100%;
+}
+
 .btn-open-image{
     background-color: #04AA6D; 
     border-radius: 12px;
@@ -33,4 +44,10 @@
 .img-card{
 
     margin: 0 auto;
+}
+
+.img-preview {
+    width: 300px; /* ajuste conforme necessário */
+    height: auto; /* mantém a proporção da imagem */
+    max-height: 300px; /* limite a altura máxima, se necessário */
 }

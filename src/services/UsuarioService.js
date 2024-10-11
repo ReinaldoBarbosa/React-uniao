@@ -50,14 +50,32 @@ const create = data => {
     return http.mainInstance.post(API_URL + "create", formData);
 };
 
+const createImage = (file) => {
+    const formData = new FormData();
+    
+    formData.append('file', file);
+
+    return http.multipartInstance.post(API_URL + `createImage`, formData);
+}
+
 const update = (id, data) => {
     const formData = new FormData();
     formData.append('nome', data.nome);
-    formData.append('email', data.email);
     formData.append('telefone', data.telefone);
+    formData.append('email', data.email);
     formData.append('cpf_cnpj', data.cpf_cnpj);
     formData.append('nivelAcesso', data.nivelAcesso);
     return http.mainInstance.put(API_URL + `update/${id}`, formData);
+};
+const updateComImagem = (id, data, file) => {
+    const formData = new FormData();
+    formData.append('nome', data.nome);
+    formData.append('telefone', data.telefone);
+    formData.append('email', data.email);
+    formData.append('file', file);
+    formData.append('cpf_cnpj', data.cpf_cnpj);
+    formData.append('nivelAcesso', data.nivelAcesso);
+    return http.multipartInstance.put(API_URL + `updateComImg/${id}`, formData);
 };
 
 const alterarSenha = (id, data) => {
@@ -87,6 +105,8 @@ const UsuarioService = {
     alterarSenha,
     findByNome,
     inativar,
+    createImage,
+    updateComImagem
 }
 
 export default UsuarioService;

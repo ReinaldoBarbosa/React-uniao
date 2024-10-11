@@ -6,6 +6,7 @@ import './Widget.css'
 import EventoService from "../../services/EventoService"
 import CandidaturaService from "../../services/CandidaturaService"
 import UsuarioService from '../../services/UsuarioService';
+import Usuario from '../../templates/Usuarios/Usuario'
 
 const Widget = ({ type }) => {
   let data;
@@ -41,10 +42,23 @@ const Widget = ({ type }) => {
         })
     }, []);
 
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        UsuarioService.findAll().then(
+            (response) => {
+                const usuarios = response.data;
+                setUsuarios(usuarios);
+            }
+        ).catch((error) => {
+            console.log(error);
+        })
+    }, []);
+
   const totalEventos = eventos.filter(evento => evento.ong.id === userID).length;
   const totalSolicitacao = candidaturas.filter(candidatura => candidatura.ong?.id === userID).length;
-  const amount = 100000;
-  const diff = 2000;
+  const amount = usuarios.filter(usuario => usuario.statusUsuario === "ATIVO").length;
+  const diff =  usuarios.filter(usuario => usuario.statusUsuario === "INATIVO").length;
 
   // Switch que define os dados baseados no tipo de widget
   switch (type) {
