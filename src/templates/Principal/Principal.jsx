@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Principal.css';
 
 import Logo from '../../assets/logo.png';
+
+import EventoService from '../../services/EventoService'
 
 /* Imagens featured */
 import Ft1 from '../../assets/img/PrincipalImg/ft1.jpeg';
@@ -91,8 +93,26 @@ const Principal = () => {
         return () => {
           window.removeEventListener('scroll', headerShadow);
           window.removeEventListener('scroll', scrollActive);
+
+          
         };
       }, []);
+
+    const [eventos, setEventos] = useState([]);
+
+    useEffect(() => {
+        EventoService.findAll().then(
+            (response) => {
+                const eventos = response.data;
+                setEventos(eventos);
+                console.log(eventos);
+            }
+        ).catch((error) => {
+            console.log(error);
+
+        
+        })
+    }, []);
     
     
   return (
@@ -294,13 +314,12 @@ const Principal = () => {
                 </div>
 
                 <article className="project__card">
-                  <img src="image/interclasse.png" alt="image" className="project__img" />
+                <img className="shadow-lg" src={eventos.fotoEvento ? 'data:image/jpeg;base64,' + eventos.fotoEvento : "Não foi"} alt="..." />
       
                   <h3 className="project__title">
-                    EVENTOS <br />
-                    BENEFICIENTE
+                    {eventos.nome}
                   </h3>
-                  <span className="project__status">Em Andamnto</span>
+                  <span className="project__status">{eventos.statusEvento}</span>
       
                   <button className="project__button">
                     <i className="ri-stack-line"></i>
