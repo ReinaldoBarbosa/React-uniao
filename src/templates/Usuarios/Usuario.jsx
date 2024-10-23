@@ -70,7 +70,7 @@ const Usuario = () => {
                         <div className="d-flex">
                             <div className="p-3 w-100">
                                 <section className="m-2 p-2 shadow-lg">
-                                    <div className="table-container ">
+                                    <div className="table-container">
                                         <div className="top_table">
                                             <Typography.Title className='title-user'>
                                                 Usuários

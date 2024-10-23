@@ -141,7 +141,7 @@ const handleFileChange = (event) => {
                         value={usuario.nome}
                         onChange={handleChange}
                       />
-                      <span className='span'>Nome deve ter no mínimo 3 caracteres</span>
+                     
                     </div>
 
                     <div className='input-box'>
@@ -153,7 +153,7 @@ const handleFileChange = (event) => {
                         value={usuario.email}
                         onChange={handleChange}
                       />
-                      <span className='span'>Email inválido</span>
+                     
                     </div>
 
                     <div className='input-box'>
@@ -165,7 +165,7 @@ const handleFileChange = (event) => {
                         value={usuario.telefone}
                         onChange={handleChange}
                       />
-                      <span className='span'>Telefone inválido</span>
+                     
                     </div>
 
                     <div className='input-box'>
@@ -177,7 +177,7 @@ const handleFileChange = (event) => {
                         value={usuario.cpf_cnpj}
                         onChange={handleChange}
                       />
-                      <span className='span'>CPF inválido</span>
+                     
                     </div>
 
                     <div className='input-box'>
@@ -189,7 +189,7 @@ const handleFileChange = (event) => {
                         value={usuario.senha}
                         onChange={handleChange}
                       />
-                      <span className='span'>Senha deve ter no mínimo 6 caracteres</span>
+                      
                     </div>
 
                     <div className='input-box'>

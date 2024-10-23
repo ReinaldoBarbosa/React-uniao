@@ -22,9 +22,25 @@ import Cooperacao from '../../assets/img/PrincipalImg/6.png';
 import ScrollReveal from 'scrollreveal';
 import { Link } from 'react-router-dom';
 import MensagemService from '../../services/MensagemService';
+
+import { ToastContainer, toast, Bounce  } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
   
 const Principal = () => {
   const [mensagens, setMensagens] = useState([]);
+
+  const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+  
+  const notify = () => {
+      toast.promise(
+          resolveAfter3Sec,
+          {
+            pending: 'Eviando Mensagem',
+            success: 'Mensagem enviada com sucesso',
+            error: 'Erro ao enviar mensagem'
+          }
+        )
+}
 
     useEffect(() => {
         // Menu Function
@@ -144,12 +160,23 @@ const Principal = () => {
           setMessage(response.data.message);
           setSuccessful(true);
 
-            alert("Mensagem enviada com sucesso");
+          toast.promise(
+            resolveAfter3Sec,
+            {
+              pending: 'Eviando Mensagem',
+              success: 'Mensagem enviada com sucesso'
+            }
+          )
             
         
         }, (error) => {
-            const message = error.response.data.message;
-            setMessage(message);
+          toast.promise(
+            resolveAfter3Sec,
+            {
+              pending: 'Eviando Mensagem',
+              error: 'Erro ao enviar mensagem'
+            }
+          )
         }
     )
 }
@@ -192,8 +219,24 @@ const Principal = () => {
           </div>
         </nav>
 
+
+
         {/* ---- MAIN ---- */}
         <main className="wrapper">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+            />
+          
           <section className="featured-box" id="home">
             <div className="featured-text">
               <div className="featured-name">

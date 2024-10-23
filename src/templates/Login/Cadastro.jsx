@@ -5,6 +5,9 @@ import SideBar from '../../components/SideBar/SideBar'
 import { Link, useNavigate } from 'react-router-dom'
 import UsuarioService from '../../services/UsuarioService'
 
+import { ToastContainer, toast, Bounce  } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Cadastro = () => {
 
     const navigate = useNavigate(); 
@@ -12,6 +15,38 @@ const Cadastro = () => {
     const [formData, setFormData] = useState({
         nivelAcesso: "ONG"
     });
+
+    const notifyError = () => {
+        toast.error('Erro ao Cadastar, verifique se as informações estão corretas!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+
+            });
+    }
+
+    const notify = () => {
+        toast.success('Ong Cadastra com Sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+    }
+
+
+
 
     const [errors, setErrors] = useState({});
     const [successful, setSuccessful] = useState(false);
@@ -102,20 +137,24 @@ const Cadastro = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-
+    
         if (Object.keys(errors).length > 0) {
             setMessage("Corrija os erros antes de enviar o formulário.");
             return;
         }
-
+    
         UsuarioService.create(formData).then(
             (response) => {
                 setMessage(response.data.message);
-                setSuccessful(true);
-                navigate('/login');
-            }, (error) => {
-                const message = error.response.data.message;
-                setMessage(message);
+                notify(); // Executa a notificação
+    
+                // Aguarda um tempo antes de navegar
+                setTimeout(() => {
+                    navigate('/login'); // Navega após a notificação ser exibida
+                }, 5000); // Altere 3000 para o tempo desejado em milissegundos
+            },
+            (error) => {
+                notifyError(); // Chama a função de notificação de erro
             }
         );
     };
@@ -163,6 +202,8 @@ const Cadastro = () => {
         return minLength && hasUpperCase && hasNumber;
     };
 
+
+    
     return (
         <div className='body_cad'>
             <div className="img">
@@ -267,6 +308,19 @@ const Cadastro = () => {
                             <div className="button">
                                 <Link to={'/'}>Voltar</Link>
                             </div>
+                            <ToastContainer
+                                position="top-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme="light"
+                                transition={Bounce}
+                                />
                         </>
                     )}
 
@@ -275,7 +329,6 @@ const Cadastro = () => {
                             <div className={
                                 "text-center h4 fst-italic py-4 rounded-2 border border-5 " + (successful ? "border-success" : "border-danger")
                             }>
-                               Erro de chave duplicada
                             </div>
                         </div>
                     )}

@@ -43,14 +43,17 @@ const Activity = () => {
         })
     }, []);
 
+    const lastUsuarios = usuarios.slice(-9).reverse();
+
+
     return (
         <>
-        {(nivel =="ADM") ? ( 
+        {(nivel == "ADM") ? ( 
             <div className="activity">
                 <Flex vertical gap="small">
                 <Flex align='center'justify='space-between' gap='large'>
                     <Typography.Title level={3} className='primary--color'>
-                        Recent Activity
+                       Usuarios Recentes
                     </Typography.Title>
                     <Link to={'/user'} className='gray--color'>
                         View All
@@ -58,18 +61,30 @@ const Activity = () => {
                 </Flex>
 
 
-                    <List pagination dataSource={usuarios}  renderItem={(user, index) => (
+                <List
+                    dataSource={lastUsuarios}
+                    renderItem={(user, index) => (
                         <List.Item className="list-item-meta">
-
-                            <List.Item.Meta
+                        <List.Item.Meta
                             className="list-item-meta"
-                            avatar={<Avatar src={'https://api.dicebear.com/7.x/miniavs/svg?seed?seed=${index}'}/>}
+                            avatar={user.fotoPerfil ? (
+                            <img
+                                className='img-header'
+                                src={'data:image/jpeg;base64,' + user.fotoPerfil}
+                                alt="..."
+                                style={{ width: '40px', height: '40px', borderRadius: '50%', display: 'flex' }}
+                            />
+                            ) : (
+                            <Avatar style={{ width: '40px', height: '40px', borderRadius: '50%', display: 'flex' }} />
+                            )}
                             title={<a href='#'>{user.nome}</a>}
                             description="Recente"
-                            ></List.Item.Meta>
-                            
+                        />
                         </List.Item>
-                    )}/>
+                    )}
+                    />
+
+
 
                 
                 </Flex>

@@ -90,7 +90,7 @@ const PerfilOng = () => {
                                 <div className="tab">Biografia</div>
                             </div>
                             <h3 className="profile-title">Últimos Eventos</h3>
-                            <div className="events">
+                            <div className="events table-wrapper">
                                 {eventosFiltrados.length > 0 ? (
                                     eventosFiltrados.map((evento) => (
                                         <a  onClick={() => verEvento(evento.id)}>
