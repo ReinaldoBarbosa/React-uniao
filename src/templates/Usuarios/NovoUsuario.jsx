@@ -8,8 +8,6 @@ import CustomHeader from '../../components/Header/Header'
 import '../Login/Cadastro.css'
 
 
-
-
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import UsuarioService from '../../services/UsuarioService'
@@ -36,7 +34,8 @@ const NovoUsuario = () => {
 
         setFormData(formData => ({ ...formData, [name]: value }));
     }
-  
+
+    
     
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -97,7 +96,7 @@ const NovoUsuario = () => {
                         <input className="required" type="text" placeholder="Digite o nome do usuario "name="nome"
                                     value={formData.nome || ""}
                                     onChange={handleChange}/>
-                        <span className="span">Nome deve ter no minimo 3 caracteris</span>
+                        <span className="span">Nome deve ter no mínimo 3 caracteres</span>
                     </div>
 
                     <div className="input-box">
@@ -105,7 +104,7 @@ const NovoUsuario = () => {
                         <input className="required" type="email" placeholder="Digite o email do usuario"  name="email"
                                     value={formData.email || ""}
                                     onChange={handleChange} />
-                        <span className="span">Email Invalido</span>    
+                        <span className="span">Email Inválido</span>    
                     </div>
 
 
@@ -114,16 +113,16 @@ const NovoUsuario = () => {
                         <input  id="telefone" className="required" type="tel" placeholder="(xx) xxxxx-xxxx" name="telefone"
                                     value={formData.telefone || ""}
                                     onChange={handleChange} />
-                        <span className="span">Telefone Invalido</span>    
+                        <span className="span">Telefone Inválido</span>    
 
                     </div>
 
                     <div className="input-box">
-                        <span className="detalis">CPF</span>
-                        <input className="required" type="text" placeholder="Digite o CNPJ ou CPF" name="cpf_cnpj"
+                        <span className="detalis">CNPJ</span>
+                        <input className="required" type="text" placeholder="Digite o CNPJ ou CPF" name="cpf_cnpj" 
                                     value={formData.cpf_cnpj || ""}
                                     onChange={handleChange}/> 
-                        <span className="span">CNPJ Invaldo</span>    
+                        <span className="span">CNPJ Inválido</span>    
 
                     </div>
 
@@ -132,11 +131,11 @@ const NovoUsuario = () => {
                         <input className="required" type="password" placeholder="Digite uma senha segura" name="senha"
                                     value={formData.senha || ""}
                                     onChange={handleChange}   />
-                        <span className="span">Senha deve ter no minimo 8 caracteres</span>    
+                        <span className="span">Senha deve ter no mínimo 6 caracteres</span>    
                     </div>
 
                     <div className="input-box">
-                        <span className="detalis">Nivel de Acesso</span>
+                        <span className="detalis">Nível de Acesso</span>
                         <select id="inputAcesso" className="form-select" name="nivelAcesso"
                                 defaultValue={''} onChange={(e) => handleChange(e)}>
 
@@ -144,7 +143,7 @@ const NovoUsuario = () => {
                                             Nível de Acesso...
                             </option>
                             <option value={"ADM"}>ADMIN</option>
-                            <option value={"VOLUNTARIO"}>VOLUNTARIO</option>
+                            <option value={"VOLUNTARIO"}>VOLUNTÁRIO</option>
                             <option value={"ONG"}>ONG</option>
                         </select>
                     </div>

@@ -95,7 +95,7 @@ const Solitacao = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th scope="col">Voluntario</th>
+                                            <th scope="col">Voluntário</th>
                                             <th scope="col">E-mail</th>
                                             <th scope="col">Evento</th>                        
                                             <th scope="col">Status</th>                        

@@ -78,7 +78,7 @@ const App = () => {
                             <div className="table-container ">
                                 <div className="top_table">
                                     <Typography.Title className='title-user'>
-                                        Ultimos Eventos
+                                        Últimos Eventos
                                     </Typography.Title>                                         
                                 </div>
                                 

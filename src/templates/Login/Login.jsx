@@ -9,23 +9,23 @@ import UsuarioService from '../../services/UsuarioService';
 
 const Login = () => {
 
-
-
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({});
-    const [message, setMessage] = useState();
+    const [message, setMessage] = useState('');
+    const [focus, setFocus] = useState({
+        email: false,
+        password: false
+    });
 
     const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setFormData(formData => ({ ...formData, [name]: value }))
-    }
+        const { name, value } = e.target;
+        setFormData(formData => ({ ...formData, [name]: value }));
+    };
 
-    useEffect(()=>{
-      const userJson = localStorage.getItem("user");
-      console.log(userJson);
-    })
+    useEffect(() => {
+        const userJson = localStorage.getItem("user");
+        console.log(userJson);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,14 +36,12 @@ const Login = () => {
                 const userJson = localStorage.getItem("user");
                 console.log(userJson);
                 const user = JSON.parse(userJson || '{}');
-                // TODO - Definir nível de acesso 
 
-                if (user.statusUsuario == 'ATIVO') {
-                    
-                    navigate('/analytics', {state:{user: userJson}});
-                } else if (user.statusUsuario == 'TROCAR_SENHA') {
+                // Verifica o status do usuário para redirecionar
+                if (user.statusUsuario === 'ATIVO') {
+                    navigate('/analytics', { state: { user: userJson } });
+                } else if (user.statusUsuario === 'TROCAR_SENHA') {
                     navigate(`/newpass/` + user.id);
-                    //window.location.reload(); ordnael@email.com.br
                 }
 
             },
@@ -57,90 +55,88 @@ const Login = () => {
 
                 setMessage(respMessage);
             }
-
         );
-    };  
+    };
 
-    const inputs = document.querySelectorAll('.input');
+    const handleFocus = (field) => {
+        setFocus({ ...focus, [field]: true });
+    };
 
-        
-
-        function focusFunc(){
-            let parent = this.parentNode.parentNode;
-            parent.classList.add('focus')
+    const handleBlur = (field) => {
+        if (!formData[field]) {
+            setFocus({ ...focus, [field]: false });
         }
+    };
 
-        function blurFunc(){
-            let parent = this.parentNode.parentNode;
-            if(this.value == ""){
-                parent.classList.remove('focus')
-            }
-        }
-
-        inputs.forEach(input =>{
-            input.addEventListener('focus',focusFunc);
-            input.addEventListener('blur',blurFunc);
-        })    
-
-  return (
-    
-    <div>
-      <img className="wave" src={Wave} alt="onda decorativa"/>
-      <div className="container-login">
-        <div className="img">
-          <img src={Bg} alt="imagem de fundo"/>
-        </div>
-
-        <div className="login-container">
-          <form className='form_login' action="" onSubmit={handleSubmit}>
-            <img className="avatar" src={Avatar} alt="avatar do usuário"/>
-            <h2>Bem-vindo</h2>
-            
-            <div className="input-div one">
-              <div className="i">
-                <i className="fas fa-user"></i>
-              </div>
-              <div>
-                <h5 htmlFor="email">Email</h5>
-                <input className="input" type="email" id="email"
-                    name="email"
-                    value={formData.email || ""}
-                    onChange={handleChange}/>
-              </div>
-            </div>
-
-            <div className="input-div two">
-              <div className="i">
-                <i className="fas fa-lock"></i>
-              </div>
-              <div>
-                <h5 htmlFor="senha">Senha</h5>
-                <input type="password" className="input" id="senha"
-                    name="password"
-                    value={formData.password || ""}
-                    onChange={handleChange}/>
-              </div>
-            </div>
-
-            <div className="alerta">
-                    {message && (
-                        <div className="fw-bold fs-5 text-danger">
-                            <span>{message}</span>
-                        </div>
-                    )}
+    return (
+        <div>
+            <img className="wave" src={Wave} alt="onda decorativa" />
+            <div className="container-login">
+                <div className="img">
+                    <img src={Bg} alt="imagem de fundo" />
                 </div>
-            
-            <a href="">Esqueceu a senha?</a>
-            <button type="submit" value="Entrar" className="btn_login">
-                Entrar
-            </button>
-          </form>
+
+                <div className="login-container">
+                    <form className='form_login' onSubmit={handleSubmit}>
+                        <img className="avatar" src={Avatar} alt="avatar do usuário" />
+                        <h2>Bem-vindo</h2>
+
+                        <div className={`input-div one ${focus.email ? 'focus' : ''}`}>
+                            <div className="i">
+                                <i className="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <input
+                                    className="input"
+                                    type="email"
+                                    name="email"
+                                    value={formData.email || ""}
+                                    onChange={handleChange}
+                                    onFocus={() => handleFocus('email')}
+                                    onBlur={() => handleBlur('email')}
+                                />
+                            </div>
+                        </div>
+
+                        <div className={`input-div two ${focus.password ? 'focus' : ''}`}>
+                            <div className="i">
+                                <i className="fas fa-lock"></i>
+                            </div>
+                            <div>
+                                <h5>Senha</h5>
+                                <input
+                                    className="input"
+                                    type="password"
+                                    name="password"
+                                    value={formData.password || ""}
+                                    onChange={handleChange}
+                                    onFocus={() => handleFocus('password')}
+                                    onBlur={() => handleBlur('password')}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="alerta">
+                            {message && (
+                                <div className="fw-bold fs-5 text-danger">
+                                    <span>{message}</span>
+                                </div>
+                            )}
+                        </div>
+
+                        <a href="/esquecisenha">Esqueceu a senha?</a>
+                        <button type="submit" className="btn_login">
+                            Entrar
+                        </button>
+                        <button type="button" className="btn_login" onClick={() => navigate('/cadastro')}>
+                            Cadastrar-se
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
-
-
 
 export default Login;

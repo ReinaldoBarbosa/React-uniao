@@ -102,7 +102,7 @@ const Activity = () => {
                                          
                                      </List.Item.Meta>
                                 ):(
-                                    <p>Nenhuma solicitação disponivel</p>
+                                    <p>Nenhuma solicitação enviada ate o momento</p>
                                 )
                                 
                                 }                                              
@@ -110,7 +110,7 @@ const Activity = () => {
                         )}/>
                     ):
                     (
-                        <h1>teste de novo</h1>
+                        <p>Nenhuma solicitação disponivel</p>
                     )
                     }
 

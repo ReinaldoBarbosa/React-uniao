@@ -21,8 +21,10 @@ import Cooperacao from '../../assets/img/PrincipalImg/6.png';
 /* Importar bibliotecas externas */
 import ScrollReveal from 'scrollreveal';
 import { Link } from 'react-router-dom';
+import MensagemService from '../../services/MensagemService';
   
 const Principal = () => {
+  const [mensagens, setMensagens] = useState([]);
 
     useEffect(() => {
         // Menu Function
@@ -113,6 +115,44 @@ const Principal = () => {
         
         })
     }, []);
+
+    const [formData, setFormData] = useState({});
+    const [errors, setErrors] = useState({});
+      const [successful, setSuccessful] = useState(false);
+      const [message, setMessage] = useState('');
+
+    useEffect(() => {
+      const userJson = localStorage.getItem('user');
+      console.log(userJson);
+    }, []);
+  
+    const handleChange = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+
+      setFormData(formData => ({ ...formData, [name]: value }));
+  }
+
+  
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSuccessful(false);
+
+    MensagemService.create(formData).then(
+        (response) => {
+          setMessage(response.data.message);
+          setSuccessful(true);
+
+            alert("Mensagem enviada com sucesso");
+            
+        
+        }, (error) => {
+            const message = error.response.data.message;
+            setMessage(message);
+        }
+    )
+}
     
     
   return (
@@ -129,7 +169,7 @@ const Principal = () => {
                 <div className="circle"></div>
               </li>
               <li className="nav_list">
-                <a href="#volun" className="nav-link">Sou Voluntario</a>
+                <a href="#volun" className="nav-link">Sou Voluntário</a>
                 <div className="circle"></div>
               </li>
               <li className="nav_list">
@@ -158,20 +198,20 @@ const Principal = () => {
             <div className="featured-text">
               <div className="featured-name">
                 <p>
-                  Nossa plataforma quer <br />
-                  divulgar Trabalhos <br />
-                  Voluntarios de Ongs
+                  Nossa plataforma tem como <br />
+                  objetivo divulgar Trabalhos <br />
+                  Voluntários de Ongs
                 </p>
               </div>
               <div className="featured-text-info">
                 <p>Juntos somos mais fortes</p>
               </div>
               <div className="featured-text-btn">
-                <a className="sop" href="#ongs">
-                  <button className="btn blue-btn">Saiba Mas</button>
+                <a className="sop" href="#information">
+                  <button className="btn blue-btn">Saiba Mais</button>
                 </a>
                 <a href="#about">
-                  <button className="btn">Sobre nos</button>
+                  <button className="btn">Sobre nós</button>
                 </a>
               </div>
               <div className="social_icons">
@@ -191,7 +231,7 @@ const Principal = () => {
                   <img src={Ft5} alt="Foto 5" />
                 </div>
                 <div className="text--info">
-                  <p>+ de 1000 usuarios</p>
+                  <p>+ de 1000 usuários</p>
                 </div>
               </div>
             </div>
@@ -251,14 +291,14 @@ const Principal = () => {
           {/* ---- VOLUNTEERS ---- */}
           <section className="new section" id="volun">
             <div className="top-header">
-              <h1>Voluntarios</h1>
+              <h1>Voluntários</h1>
             </div>
             <div className="new__container container grid">
               <div className="row">
                 <div className="col">
                   <div className="new__data">
                     <h2 className="section__title">
-                      O.L.E APRESENTA <br />
+                      U.V APRESENTA <br />
                       ALGUMAS IDEIAS
                     </h2>
                     <br />
@@ -303,83 +343,9 @@ const Principal = () => {
           </section>
 
           {/* ---- PROJECTS ---- */}
-          <section className="new section" id="projects">
-            <div className="top-header">
-              <h1>Evento</h1>
-            </div>
+        
 
-            <div className="project__container container grid">
-                <div className="project_icon">
-                  <i className="ri-arrow-left-s-line"></i>
-                </div>
-
-                <article className="project__card">
-                <img className="shadow-lg" src={eventos.fotoEvento ? 'data:image/jpeg;base64,' + eventos.fotoEvento : "Não foi"} alt="..." />
-      
-                  <h3 className="project__title">
-                    {eventos.nome}
-                  </h3>
-                  <span className="project__status">{eventos.statusEvento}</span>
-      
-                  <button className="project__button">
-                    <i className="ri-stack-line"></i>
-                  </button>
-                </article>
-      
-                <article className="project__card">
-                  <img src="image/evento.png" alt="image" className="project__img" />
-      
-                  <h3 className="project__title">
-                    EVENTOS <br />
-                    BENEFICIENTE
-                  </h3>
-                  <span className="project__status">A Começar</span>
-      
-                  <button className="project__button">
-                    <i className="ri-stack-line"></i>
-                  </button>
-                </article>
-      
-                <article className="project__card">
-                  <img src="image/carta 2.png" alt="image" className="project__img" />
-      
-                  <h3 className="project__title">
-                    EVENTOS <br />
-                    BENEFICIENTE
-                  </h3>
-                  <span className="project__status">A Começar</span>
-      
-                  <button className="project__button">
-                    <i className="ri-stack-line"></i>
-                  </button>
-                </article>
-
-                <article className="project__card">
-                  <img src="image/parceria.png" alt="image" className="project__img" />
-      
-                  <h3 className="project__title">
-                    EVENTOS <br />
-                    BENEFICIENTE
-                  </h3>
-                  <span className="project__status">Em Andamento</span>
-      
-                  <button className="project__button">
-                    <i className="ri-stack-line"></i>
-                  </button>
-                </article>
-
-                <div className="project_icon">
-                  <i className="ri-arrow-right-s-line"></i>
-                </div>
-                
-              </div>
-
-              <div className="project_list">
-                <div className="list_circle active"></div>
-                <div className="list_circle"></div>
-                <div className="list_circle"></div>
-              </div>
-          </section>
+          
 
           {/* ---- ONGs ---- */}
           <section className="ong section" id="ongs">
@@ -478,12 +444,62 @@ const Principal = () => {
               </div>
             </div>
           </section>
+          <section>
+          <div>
+      <h2>Fale Conosco</h2>
+      <form onSubmit={handleSubmit} >
+        <div>
+          <label>Nome:</label>
+          <input
+            type="text"
+            placeholder="Digite seu nome"  
+            name="emissorMensagem"
+            value={formData.emissorMensagem}
+            onChange={handleChange}
+            
+          />
+        </div>
+        <div>
+        
+        </div>
+        <label>Email:</label>
+        <div className='input-box2'>
+          
+          <input 
+          type="email" 
+          placeholder="Digite seu email"  
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          
+          />
+        </div>
+        <div>
+          <label>Mensagem:</label>
+          <textarea
+          placeholder="Digite aqui sua mensagem"  
+            name="texto"
+            value={formData.texto}
+             onChange={handleChange}
+            
+            
+          />
+        </div>
+        <div>
+        
+        
+        <button type='submit' className="btn blue-btn">Enviar</button>
+        </div>
+      </form>
+    </div>
+          </section>
         </main>
 
         {/* ---- FOOTER ---- */}
         <footer>
+      
             <div className="top-footer">
-                <p>União Voluntaria</p>
+                <p>União Voluntária</p>
             </div>
             <div className="middle-footer">
                 <ul className="footer-menu">
@@ -513,7 +529,7 @@ const Principal = () => {
             <div className="bottom-footer">
                 <p>
                 Copyright &copy; 
-                <a href="#home" style={{ textDecoration: "none" }}>Reinado Barbosa</a>
+                <a href="#home" style={{ textDecoration: "none" }}>Reinaldo Barbosa</a>
                 </p>
             </div>
         </footer>

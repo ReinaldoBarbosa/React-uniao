@@ -122,7 +122,7 @@ const EditarUsuario = () => {
                         <input className="required" type="text" name='nome'
                                     value={usuario.nome}
                                     onChange={handleChange}/>
-                        <span className="span">Nome deve ter no minimo 3 caracteres</span>
+                        <span className="span">Nome deve ter no mínimo 3 caracteres</span>
                     </div>
 
                     <div className="input-box">
@@ -130,7 +130,7 @@ const EditarUsuario = () => {
                         <input className="required" type="email" placeholder="Digite o email do usuario"  name="email"
                                     value={usuario.email}
                                     onChange={handleChange} />
-                        <span className="span">Email Invalido</span>    
+                        <span className="span">Email Inválido</span>    
                     </div>
 
 
@@ -139,7 +139,7 @@ const EditarUsuario = () => {
                         <input  id="telefone" className="required" type="tel" placeholder="(xx) xxxxx-xxxx" name="telefone"
                                     value={ usuario.telefone}                                
                                     onChange={handleChange} />
-                        <span className="span">Telefone Invalido</span>    
+                        <span className="span">Telefone Inválido</span>    
 
                     </div>
 
@@ -148,7 +148,7 @@ const EditarUsuario = () => {
                         <input className="required" type="text" placeholder="Digite o CNPJ ou CPF" name="cpf_cnpj"
                                     value={usuario.cpf_cnpj || ''}                                 
                                     onChange={handleChange}/> 
-                        <span className="span">CNPJ Invaldo</span>    
+                        <span className="span">CNPJ Inválido</span>    
 
                     </div>
 
@@ -157,11 +157,11 @@ const EditarUsuario = () => {
                         <input className="required" type="password" placeholder="Digite uma senha segura" name="senha"
                                     value={usuario.senha }                                    
                                     onChange={handleChange}   />
-                        <span className="span">Senha deve ter no minimo 8 caracteres</span>    
+                        <span className="span">Senha deve ter no mínimo 6 caracteres</span>    
                     </div>
 
                     <div className="input-box">
-                        <span className="detalis">Nivel de Acesso</span>
+                        <span className="detalis">Nível de Acesso</span>
                         <select id="inputAcesso" className="form-select" name="nivelAcesso"
                                 defaultValue={''} onChange={(e) => handleChange(e)}>
 
@@ -169,7 +169,7 @@ const EditarUsuario = () => {
                                             {usuario.nivelAcesso}
                             </option>   
                             <option value={"ADM"}>ADMIN</option>
-                            <option value={"VOLUNTARIO"}>VOLUNTARIO</option>
+                            <option value={"VOLUNTARIO"}>VOLUNTÁRIO</option>
                             <option value={"ONG"}>ONG</option>
                         </select>
                     </div>

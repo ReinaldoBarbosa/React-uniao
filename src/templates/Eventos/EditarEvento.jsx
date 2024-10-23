@@ -73,6 +73,19 @@ const EditarEvento = () => {
         navigate(`/detalisEvento/${id}`);
     };
 
+    const inativar = () => {
+
+        UsuarioService.inativar(id).then(
+            (response) => {
+                window.location.reload();
+            }, (error) => {
+                const message = error.response.data.message;
+                setMessage(message);
+            }
+        )
+    }
+
+
     return (
         <Layout className="body">
             <Sider theme='light' trigger={null} collapsible collapsed={collapsed} className='sider'>
@@ -134,7 +147,7 @@ const EditarEvento = () => {
                                         </div>
                                         <div className="form-group compact">
                                             <div className="form-group-half">
-                                                <label htmlFor="numero">Numero</label>
+                                                <label htmlFor="numero">Número</label>
                                                 <input type="text" id="numero" name="numero" required
                                                     value={evento.numero}
                                                     onChange={handleChange} />
@@ -146,7 +159,6 @@ const EditarEvento = () => {
                                                         Nível de Acesso...
                                                     </option>
                                                     <option value="ATIVO">Ativo</option>
-                                                    <option value="INATIVO">Inativo</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -161,6 +173,7 @@ const EditarEvento = () => {
                                             <img className="shadow-lg" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
                                         </div>
                                         <button type="submit" className="btn-criar">Atualizar Evento</button>
+                                        <button type="submit" onClick={() => inativar(evento.id)} className="btn-criar">Inativar</button>
                                     </>
                                 )}
                                 {message && (

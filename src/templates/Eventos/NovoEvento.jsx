@@ -157,7 +157,7 @@ const NovoEvento = () => {
                                         </div>
                                         <div className="form-group compact">
                                             <div className="form-group-half">
-                                                <label htmlFor="numero">Numero</label>
+                                                <label htmlFor="numero">Número</label>
                                                 <input type="text" id="numero" name="numero" required
                                                     value={formData.numero || ""}
                                                     onChange={handleChange} />

@@ -189,7 +189,7 @@ const handleFileChange = (event) => {
                         value={usuario.senha}
                         onChange={handleChange}
                       />
-                      <span className='span'>Senha deve ter no mínimo 8 caracteres</span>
+                      <span className='span'>Senha deve ter no mínimo 6 caracteres</span>
                     </div>
 
                     <div className='input-box'>

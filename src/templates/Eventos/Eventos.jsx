@@ -58,19 +58,18 @@ function Eventos() {
                             {eventos?.length > 0 ? (
                                 eventos.map((evento) => (
                                     evento.ong.id === userID && ( 
-                                    <a key={evento.id} onClick={() => editar(evento.id)}>
+                                        <a  onClick={() => editar(evento.id)}>
                                         <div className="card">
-                                        <div className="top-header">
-                                            <img className="img_perfil" src={evento.ong.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
-
-                                            
-                                            <span className="author">{evento.nome}</span>
-                                            <p >{evento.ong.nome}</p>
-                                        </div>
-                                        <div className="card-content">
-                                            <img src={evento.foto ? 'data:image/jpeg;base64,' + evento.foto : logo} className="img-evento" alt="..." />
+                                            <div className="top-header">
+                                            <img className="img_perfil" src={evento.ong?.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
+                                            <span className="author">{evento.ong.nome}</span>
+                                            </div>
+                                                            
+                                            <div className="card-content">
+                                            <img className="img-evento" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
                                             <p className="description">{evento.infos}</p>
-                                        </div>
+                                            </div>
+                                                            
                                         </div>
                                     </a>
                                     )

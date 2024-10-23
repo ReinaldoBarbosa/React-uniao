@@ -27,3 +27,11 @@
     display: flex;
     align-items: center;
 }
+
+.foto-perfil
+{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}

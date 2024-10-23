@@ -1,5 +1,4 @@
 
-
     .body_cad {
       display: flex;
       height: 100vh;
@@ -149,12 +148,19 @@
       background: linear-gradient(-135deg, #87ffd7, #51c49e);
     }
 
-    .span {
+  
+
+    .span-error
+     {
       font-size: 12px;
       margin: 3px 0 0 1px;
       color: #e63636;
-      display: none;
+      
     }
+
+    .user-detalis .input-box input.error {
+      border-color: #e63636; /* Cor da borda para erro */
+  }
 
     @media (max-width: 600px) {
       .wave {

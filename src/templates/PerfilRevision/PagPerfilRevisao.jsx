@@ -108,7 +108,7 @@ const PagPerfilRevisao = () => {
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Voluntario</th>
+                                                    <th scope="col">Voluntário</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">ONG</th>
                                                     <th scope="col">Evento</th>                        
@@ -174,7 +174,7 @@ const PagPerfilRevisao = () => {
                             </div>
 
 
-                            <button type="submit" className="btn-criar">Concluir avalição</button>
+                            <button type="submit" className="btn-criar">Concluir avaliação</button>
                         </form>
                     </div>
                 </div>

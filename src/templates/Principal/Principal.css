@@ -1193,3 +1193,12 @@ footer
         right: 3rem;
     }
 }
+.input-box2  {
+    height: 45px;
+    width: 100%;
+    outline: #1f8863;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 25px;
+  }

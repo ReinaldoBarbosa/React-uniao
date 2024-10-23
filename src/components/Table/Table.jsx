@@ -37,7 +37,7 @@ const PerfilRevision = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th scope="col">Voluntario</th>
+                                            <th scope="col">Voluntário</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">ONG</th>
                                             <th scope="col">Evento</th>                        
