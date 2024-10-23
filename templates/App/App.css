@@ -1,0 +1,109 @@
+/*---- MAIN APP ----*/
+
+.body
+{
+  background-color: #dde6ed;
+}
+
+.header
+{
+    background: #fff;
+    margin: 12px 34px 0px;
+    border-radius: 10px;
+}
+
+.content
+{
+    margin: 24px 16px;
+    padding: 20px;
+}
+
+/*---- SIDER ----*/
+
+.sider
+{
+    height: 100vh;
+    position: sticky !important;
+    left: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.logo
+{
+    color: #3BEFB3;
+    margin: 5px 0;
+    font-size: 1.5rem;
+}
+
+.menu-bar
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.ant-input{
+    display: flex;
+
+}
+
+
+
+/*---- HEADER ----*/
+
+.header-icon
+{
+    background: #d2e3c8;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 15p;
+    color: #2AC08D;
+    cursor: pointer;
+}
+
+/*---- BUTTON, AND COLOR ----*/
+
+
+
+.primary--color
+{
+    color: #2AC08D !important;
+}
+
+.primary--light--color
+{
+    color: #3BEFB3 !important;
+}
+
+.secondary--color
+{
+    color: #3BEFB3 !important;
+}
+
+.ligth--color
+{
+    color: #3BEFB3 !important;
+}
+
+.gray--color
+{
+    color: rgb(182, 181, 181) !important;
+}
+
+
+/*---- SELLER LIST ----*/
+
+
+.header_search
+{
+    bottom: 1rem;
+}
+
+.widgets
+{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
