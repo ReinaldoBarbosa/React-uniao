@@ -897,15 +897,14 @@ footer
 {
     color: var(--first-color);
 }
+
+
 /*================= BREAKPOINTES ====================*/
 
 /*For small devices*/
 
 @media screen and (min-width: 320px){
-    .container
-    {
-        margin-inline: 1rem;
-    }
+  
 
     .home__title
     {

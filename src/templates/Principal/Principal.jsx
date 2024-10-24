@@ -184,7 +184,7 @@ const Principal = () => {
     
   return (
     <>
-      <div className="container">
+      <div className="container_principal">
         <nav id="header">
           <div className="nav-logo">
             <img className="nav-img" src={Logo}  alt="Logo" />
