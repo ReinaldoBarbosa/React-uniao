@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './NovoEvento.css';
-import { Button, Layout, Modal } from 'antd';
+import { Avatar, Button, Layout, Modal } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import SideBar from '../../components/SideBar/SideBar';
 import { Content, Header } from 'antd/es/layout/layout';
@@ -9,9 +9,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import EventoService from '../../services/EventoService';
 import { useNavigate } from 'react-router-dom';
 import UsuarioService from '../../services/UsuarioService';
-import ImageUploader from '../../components/ImageUploader/ImageUploader';
-import ImageUploaderModal from "../../components/ImageUploader/ImageUploaderModal"
-
+import ImageUploaderModal from "../../components/ImageUploader/ImageUploaderModal";
 
 const NovoEvento = () => {
     const navigate = useNavigate();
@@ -24,36 +22,50 @@ const NovoEvento = () => {
     const [chosenImage, setChosenImage] = useState(null);
     const [collapsed, setCollapsed] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [usuarios, setUsuarios] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(''); // Estado para armazenar o texto de busca
+    const [selectedOng, setSelectedOng] = useState(''); // Estado para armazenar a ONG selecionada
+    const [selectedOngEmail, setSelectedOngEmail] = useState(''); // Estado para armazenar o email da ONG selecionada
+    const [filteredUsers, setFilteredUsers] = useState([]); // Estado para armazenar usuários filtrados
 
-    const previewImage = (event) => {
-        const file = event.target.files[0];
-    
-        if (file) {
-          const reader = new FileReader();
-    
-          reader.onload = () => {
-            console.log("Imagem carregada com sucesso!");
-            setFoto(reader.result); // Aqui a imagem é convertida para base64 e armazenada no estado
-          };
-    
-          reader.onerror = (error) => {
-            console.error("Erro ao carregar a imagem: ", error);
-          };
-    
-          reader.readAsDataURL(file);
-        } else {
-          console.log("Nenhum arquivo selecionado.");
-        }
-      };
+    const handleSearch = (e) => {
+        const searchValue = e.target.value;
+        setSearchTerm(searchValue);
+        
+        // Filtra usuários baseados no termo de busca
+        const filtered = usuarios.filter((user) => 
+            user.nivelAcesso === "ONG" &&
+            user.nome.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        
+        setFilteredUsers(filtered); // Atualiza a lista de usuários filtrados
+    };
 
-      const setChosenFile = (dataFile) => {
+    const handleSelect = (user) => {
+        setSelectedOng(user.nome); // Define o nome da ONG selecionada
+        setSelectedOngEmail(user.email); // Define o email da ONG selecionada
+        setSearchTerm(user.nome); // Atualiza o campo de texto com o nome selecionado
+        setFilteredUsers([]); // Esconde a lista de sugestões após selecionar
+    };
+
+    const setChosenFile = (dataFile) => {
         setFile(dataFile);
-    }
+    };
 
     const setImage = (dataImage) => {
         setChosenImage(dataImage);
-    }
+    };
 
+    useEffect(() => {
+        UsuarioService.findAll().then(
+            (response) => {
+                const usuarios = response.data;
+                setUsuarios(usuarios);
+            }
+        ).catch((error) => {
+            console.log(error);
+        });
+    }, []);
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -76,9 +88,15 @@ const NovoEvento = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+
         const formDataWithImage = { ...formData, foto: chosenImage };
 
-        EventoService.create(file, formDataWithImage, usuario.email).then(
+        // Define o email do responsável pelo evento: ou a ONG selecionada ou o próprio usuário logado
+        const responsavelEmail = usuario.nivelAcesso === "ADM" && selectedOngEmail
+            ? selectedOngEmail 
+            : usuario.email;
+
+        EventoService.create(file, formDataWithImage, responsavelEmail).then(
             (response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
@@ -173,6 +191,55 @@ const NovoEvento = () => {
                                                 </select>
                                             </div>
                                         </div>
+
+                                        {/* Exibir seleção de ONG apenas para ADM */}
+                                        {usuario.nivelAcesso === "ADM" && (
+                                            <div className="form-group-half" style={{ position: 'relative' }}>
+                                                <label htmlFor="ong">Ong</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Digite o nome da ONG"
+                                                    value={searchTerm}
+                                                    onChange={handleSearch}
+                                                    style={{ marginBottom: '10px', width: '100%' }}
+                                                />
+                                                {filteredUsers.length > 0 && (
+                                                    <ul className="suggestions-list" style={{
+                                                        listStyleType: 'none', 
+                                                        padding: 0, 
+                                                        margin: 0, 
+                                                        border: '1px solid #ccc', 
+                                                        maxHeight: '150px', 
+                                                        overflowY: 'auto', 
+                                                        position: 'absolute', 
+                                                        zIndex: 10, 
+                                                        width: '100%',
+                                                        backgroundColor: '#fff'
+                                                    }}>
+                                                        {filteredUsers.map((user) => (
+                                                            <li 
+                                                                key={user.id}
+                                                                onClick={() => handleSelect(user)} 
+                                                                style={{
+                                                                    padding: '10px', 
+                                                                    cursor: 'pointer', 
+                                                                    borderBottom: '1px solid #ccc'
+                                                                }}
+                                                            >
+                                                                <img 
+                                                                    className="img_perfil" 
+                                                                    src={user.fotoPerfil ? 'data:image/jpeg;base64,' + user.fotoPerfil : <Avatar />} 
+                                                                    alt="..." 
+                                                                    style={{ width: '20px', height: '20px', borderRadius: '50%', marginRight: '8px' }}
+                                                                />   
+                                                                {user.nome}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        )}
+
                                         <div className="form-group">
                                             <label htmlFor="informacoes">Informações</label>
                                             <textarea id="informacoes" name="infos" rows="4" required
@@ -188,11 +255,11 @@ const NovoEvento = () => {
                                                 onCancel={() => setIsModalVisible(false)}
                                                 footer={null}
                                             >
-
                                                 <ImageUploaderModal
-                                                setFile={setChosenFile}
-                                                setImage={setImage} 
-                                                chosenImage={chosenImage} />
+                                                    setFile={setChosenFile}
+                                                    setImage={setImage}
+                                                    chosenImage={chosenImage}
+                                                />
                                                 <input type="file" accept="image/*" onChange={handleFileChange} />
                                                 {chosenImage && <img src={chosenImage} alt="Preview" style={{ width: '100%', marginTop: '10px' }} />}
                                             </Modal>
