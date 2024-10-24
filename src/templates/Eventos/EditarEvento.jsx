@@ -74,15 +74,18 @@ const EditarEvento = () => {
     };
 
     const inativar = () => {
-
-        UsuarioService.inativar(id).then(
+        // Chamar o serviço correto para inativar o evento
+        EventoService.inativar(id).then(
             (response) => {
-                window.location.reload();
-            }, (error) => {
-                const message = error.response.data.message;
-                setMessage(message);
+                // Exibir uma mensagem de sucesso e redirecionar ou atualizar a página
+                alert("Evento inativado com sucesso.");
+                navigate('/eventos'); // Voltar para a lista de eventos ou página adequada
+            }, 
+            (error) => {
+                const errorMessage = error.response?.data?.message || "Erro ao inativar o evento.";
+                setMessage(errorMessage);
             }
-        )
+        );
     }
 
 

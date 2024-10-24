@@ -91,20 +91,22 @@ function Eventos() {
                     <section className="cards-events">                                                                         
                         <div className="container">
                             {eventos?.map((evento) => (
-                                <a  onClick={() => editar(evento.id)}>
-                                    <div className="card">
-                                        <div className="top-header">
-                                        <img className="img_perfil" src={evento.ong?.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
-                                        <span className="author">{evento.ong.nome}</span>
+                                evento.statusEvento === "ATIVO" && (
+                                    <a  onClick={() => editar(evento.id)}>
+                                        <div className="card">
+                                            <div className="top-header">
+                                            <img className="img_perfil" src={evento.ong?.fotoPerfil ? 'data:image/jpeg;base64,' + evento.ong.fotoPerfil : <Avatar/> } alt="..." />                            
+                                            <span className="author">{evento.ong.nome}</span>
+                                            </div>
+                                                            
+                                            <div className="card-content">
+                                            <img className="img-card" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
+                                            <p className="description">{evento.infos}</p>
+                                            </div>
+                                                            
                                         </div>
-                                                        
-                                        <div className="card-content">
-                                        <img className="shadow-lg" src={evento.fotoEvento ? 'data:image/jpeg;base64,' + evento.fotoEvento : "Não foi"} alt="..." />
-                                        <p className="description">{evento.infos}</p>
-                                        </div>
-                                                        
-                                    </div>
-                                </a>
+                                    </a>
+                                )
                             ))}                                          
                         </div>                              
                     </section>
