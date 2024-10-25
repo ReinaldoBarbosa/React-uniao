@@ -4,7 +4,7 @@ import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import SideBar from '../../components/SideBar/SideBar'
 import CustomHeader from '../../components/Header/Header'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import { MenuUnfoldOutlined, MenuFoldOutlined, EditOutlined } from '@ant-design/icons'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import './DetalisEvento.css'
@@ -51,6 +51,10 @@ const DetalisEvento = () => {
 
     }, []);
 
+    const editar = (id) => {
+        navigate(`/editarEvento/${id}`)
+    }
+
 
     const [collapsed, setCollapsed] = useState(false); 
     return (
@@ -73,15 +77,17 @@ const DetalisEvento = () => {
                         <div className="container-perfil">
                         <div class="profile">
                             <div class="profile-header">
-                            
-                            <Link to={`/editarEvento/${id}`}> Editar</Link>
-                            <Link to={'/eventos'}> sssss</Link>
+                        
                             </div>
                             <div class="profile-info">
 
                                 <div className="profile-txt">
+
                                 <h2>{evento.nome}</h2>
                                 <p>{evento.ong.nome}</p>
+                                <button onClick={() => editar(evento.id)}>
+                                                                    <EditOutlined />
+                                                                </button>
                                 </div>
                             </div>
                             <div class="tabs">
